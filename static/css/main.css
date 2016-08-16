@@ -1,0 +1,37 @@
+div #content {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+div #title {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;	
+}
+
+.links line {
+  stroke: #aaa;
+  stroke-width: 4;
+}
+
+.nodes circle {
+  stroke: none;
+  stroke-width: 40px;
+}
+
+.nodes text {
+	font-family: serif;	
+}
+
+.kanji {
+	font-size: 20px;
+	fill: blue;
+}
+
+.on {
+	font-size: 30px;
+	fill: green;
+}
