@@ -12,6 +12,11 @@ div #title {
 	text-align: center;	
 }
 
+div #toggleWrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
 .links line {
   stroke: #aaa;
   stroke-width: 4;
@@ -28,10 +33,15 @@ div #title {
 
 .kanji {
 	font-size: 20px;
-	fill: blue;
+	fill: red;
 }
 
 .on {
 	font-size: 30px;
 	fill: green;
+}
+
+.kun {
+	font-size: 20px;
+	fill: blue;	
 }

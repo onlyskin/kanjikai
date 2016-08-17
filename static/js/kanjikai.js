@@ -18,7 +18,17 @@ var data = {
 		{id: 'テン', type: 'on'},
 		{id: 'コウ', type: 'on'},
 		{id: 'エン', type: 'on'},
-		{id: 'リツ', type: 'on'}
+		{id: 'リツ', type: 'on'},
+		{id: 'みる', type: 'kun'},
+		{id: 'ち', type: 'kun'},
+		{id: 'さき', type: 'kun'},
+		{id: 'あか', type: 'kun'},
+		{id: 'いし', type: 'kun'},
+		{id: 'あめ', type: 'kun'},
+		{id: 'あま', type: 'kun'},
+		{id: 'たかい', type: 'kun'},
+		{id: 'まる', type: 'kun'},
+		{id: 'たつ', type: 'kun'}
 	],
 	links: [
 		{source: '見', target: 'ケン'},
@@ -32,7 +42,18 @@ var data = {
 		{source: '点', target: 'テン'},
 		{source: '高', target: 'コウ'},
 		{source: '円', target: 'エン'},
-		{source: '立', target: 'リツ'}
+		{source: '立', target: 'リツ'},
+		{source: '見', target: 'みる'},
+		{source: '千', target: 'ち'},
+		{source: '先', target: 'さき'},
+		{source: '赤', target: 'あか'},
+		{source: '石', target: 'いし'},
+		{source: '天', target: 'あめ'},
+		{source: '天', target: 'あま'},
+		{source: '高', target: 'あま'},
+		{source: '高', target: 'たかい'},
+		{source: '円', target: 'まる'},
+		{source: '立', target: 'たつ'}
 	]
 };
 
@@ -43,6 +64,8 @@ var svg = d3.select('#content').append('svg');
 
 var width = 1000;
 var height = window.innerHeight * 0.8;
+
+var circleRadius = {'kanji': 4, 'on': 8, 'kun': 4};
 
 svg.attr('height', height)
    .attr('width', '100%');
@@ -60,7 +83,7 @@ svg.append("rect")
     .style("fill", "none")
     .style("pointer-events", "all")
     .call(d3.zoom()
-        .scaleExtent([1, 10])
+        .scaleExtent([1 / 10, 10])
         .on("zoom", zoomed));
 
 function zoomed() {
@@ -76,45 +99,56 @@ var simulation = d3.forceSimulation()
 	.force('collide', d3.forceCollide(35))
     .force('center', d3.forceCenter(width / 2, height / 2));
 
-var link = g.append('g')
-	  .attr('class', 'links')
-	.selectAll('line')
-	.data(links)
-	.enter().append('line');
-
-var node = g.append('g')
-	  .attr('class', 'nodes')
-	.selectAll('circle')
-	.data(nodes);
-
-var circleRadius = {'kanji': 4, 'on': 8}
-
-var circles = node.enter().append('circle')
-	  .attr('r', function(d) { return circleRadius[d.type] });
-
-var text = node.enter().append('text')
-	.text(function(d) { return d.id; })
-	.attr('class', function(d) { return d.type; });
-
 simulation
 	.nodes(nodes)
-	.on('tick', ticked);
+	.stop();
 
 simulation.force('link')
 	.links(links);
 
-function ticked() {
-    link
-        .attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+function update() {
+	var link = g.append('g')
+		  .attr('class', 'links')
+		.selectAll('line')
+		.data(links)
+		.enter().append('line');
 
-    circles
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+	var node = g.append('g')
+		  .attr('class', 'nodes')
+		.selectAll('circle')
+		.data(nodes);
 
-    text
-        .attr("x", function(d) { return d.x; })
-        .attr("y", function(d) { return d.y; });
-  }
+	var circles = node.enter().append('circle')
+		  .attr('r', function(d) { return circleRadius[d.type] });
+
+	var text = node.enter().append('text')
+		.text(function(d) { return d.id; })
+		.attr('class', function(d) { return d.type; });
+
+	function ticked() {
+	    link
+	        .attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
+
+	    circles
+	        .attr("cx", function(d) { return d.x; })
+	        .attr("cy", function(d) { return d.y; });
+
+	    text
+	        .attr("x", function(d) { return d.x; })
+	        .attr("y", function(d) { return d.y; });
+	}
+
+	simulation
+		.on('tick', ticked)
+		.restart();
+};
+
+update();
+
+toggle = document.getElementById('readingToggle');
+toggle.onchange = function() {
+	console.log(toggle.value);
+};
