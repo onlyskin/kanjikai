@@ -52,6 +52,21 @@ window.onresize = function() {
 	svg.attr('height', window.innerHeight * 0.8)
 };
 
+var g = svg.append('g');
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .call(d3.zoom()
+        .scaleExtent([1, 10])
+        .on("zoom", zoomed));
+
+function zoomed() {
+  g.attr("transform", d3.event.transform);
+}
+
 var simulation = d3.forceSimulation()
 	.force('link', d3.forceLink()
 		.id(function(d) { return d.id; })
@@ -61,13 +76,13 @@ var simulation = d3.forceSimulation()
 	.force('collide', d3.forceCollide(35))
     .force('center', d3.forceCenter(width / 2, height / 2));
 
-var link = svg.append('g')
+var link = g.append('g')
 	  .attr('class', 'links')
 	.selectAll('line')
 	.data(links)
 	.enter().append('line');
 
-var node = svg.append('g')
+var node = g.append('g')
 	  .attr('class', 'nodes')
 	.selectAll('circle')
 	.data(nodes);

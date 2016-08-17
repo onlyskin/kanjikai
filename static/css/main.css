@@ -3,7 +3,7 @@ div #content {
 	margin: 0 auto;
 	text-align: center;
 	border: 1px solid black;
-	border-radius: 3px;
+	border-radius: 10px;
 }
 
 div #title {
