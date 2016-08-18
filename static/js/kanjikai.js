@@ -50,12 +50,16 @@ var data = {
 		{source: '石', target: 'いし'},
 		{source: '天', target: 'あめ'},
 		{source: '天', target: 'あま'},
-		{source: '高', target: 'あま'},
 		{source: '高', target: 'たかい'},
 		{source: '円', target: 'まる'},
 		{source: '立', target: 'たつ'}
 	]
 };
+
+removedData = {
+	nodes: [],
+	links: []
+}
 
 var nodes = data.nodes;
 var links = data.links;
@@ -150,5 +154,31 @@ update();
 
 toggle = document.getElementById('readingToggle');
 toggle.onchange = function() {
-	console.log(toggle.value);
+	//move any nodes in removedData back to data
+	if (removedData.nodes.length > 0)
+		{
+		for (var i = removedData.nodes.length - 1; i >=0; i--)
+			{data.nodes.push(removedData.nodes.splice(i, 1)); }
+		}
+	//move any links in removedData back to data
+	if (removedData.links.length > 0)
+		{
+		for (var i = removedData.links.length - 1; i >=0; i--)
+			{data.links.push(removedData.links.splice(i, 1)); }
+		}
+	console.log(data);
+	console.log(removedData);
+	//move all matching nodes from data to removedData
+	for (var i = data.nodes.length - 1; i >= 0; i--)
+		{ if (data.nodes[i].type == toggle.value)
+			{ removedData.nodes.push(data.nodes.splice(i, 1)); }
+		 }
+	//move all matching links from data to removedData
+	for (var i = data.links.length - 1; i >= 0; i--)
+		{
+			if (data.links[i].target.type == toggle.value)
+				{ removedData.links.push(data.links.splice(i, 1)); }
+		}
+	console.log(data);
+	console.log(removedData);
 };
