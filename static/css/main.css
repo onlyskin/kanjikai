@@ -19,7 +19,7 @@ div #toggleWrapper {
 
 .links line {
   stroke: #aaa;
-  stroke-width: 4;
+  stroke-width: 1;
 }
 
 .nodes circle {
@@ -28,20 +28,22 @@ div #toggleWrapper {
 }
 
 .nodes text {
-	font-family: serif;	
 }
 
 .kanji {
 	font-size: 20px;
 	fill: red;
+	font-family: serif;	
 }
 
 .on {
 	font-size: 30px;
 	fill: green;
+	font-family: sans-serif;
 }
 
 .kun {
 	font-size: 20px;
 	fill: blue;	
+	font-family: serif;	
 }
