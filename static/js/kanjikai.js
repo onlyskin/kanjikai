@@ -1,8 +1,14 @@
-d3.json('static/data/medium.json', function(response) {
+d3.json('static/data/large.json', function(response) {
 
-	originalData = JSON.parse(JSON.stringify(response));
+//	originalData = JSON.parse(JSON.stringify(response));
 
 	var data = response;
+	var allKanji = '';
+	for (i in data.nodes) {
+		if (data.nodes[i].type === 'kanji') {
+			allKanji += data.nodes[i].id
+		}
+	}
 
 	function linkExists(kanji, reading, data) {
 		var linkExists = false;
@@ -17,25 +23,26 @@ d3.json('static/data/medium.json', function(response) {
 		return linkExists;
 	}
 
-	function filterData(data, filter) {
-		return filter(data);
-	}
-
 	//Creates a custom filter function for changing the nodes/links object
 	//excludeReading specifies either 'on' or 'kun' to be excluded
 	//excludeKanji specifies a string of any number of kanji to be removed
+	//includeKanji specifies a string of any number of kanji which are
+	//  included to the exclusion of all others
 	function Filter(settings) {
 		this.excludeReading = settings.excludeReading;
 		this.excludeKanji = settings.excludeKanji;
 		this.includeKanji = settings.includeKanji;
 		this.process = function(data) {
 			var that = this;
+			//Remove either 'on' or 'kun' readings
 			data.nodes = data.nodes.filter(function(obj) {
 				return obj.type !== that.excludeReading && obj.type!== "unknown";
 			});
 			data.links = data.links.filter(function(obj) {
 				return obj.type !== that.excludeReading && obj.type!== "unknown";
 			});
+
+			//Remove any kanji in the exclude list
 			data.nodes = data.nodes.filter(function(obj) {
 				return that.excludeKanji.indexOf(obj.id) === -1;
 			});
@@ -43,37 +50,44 @@ d3.json('static/data/medium.json', function(response) {
 				return that.excludeKanji.indexOf(obj.source) === -1
 						&& that.excludeKanji.indexOf(obj.target) === -1;
 			});
+
+/*			//Remove any kanji not in the include list if not ''
 			if (this.includeKanji !== '') {
+				includeKanjiList = that.includeKanji.split('')
 				data.nodes = data.nodes.filter(function(obj) {
-					///resume from here, this is where the bug is
-					console.log(data.nodes.indexOf(obj));
-					readingNodeHasLink = that.includeKanji.split().map(function(item) {
+					readingNodeHasLink = includeKanjiList.map(function(item) {
 						return linkExists(item, obj.id, data);
-					})
+					});
 					return (obj.type === 'kanji'
 						&& that.includeKanji.indexOf(obj.id) !== -1)
-//					||
-//					(obj.type !== 'kanji'
-//						&& readingNodeHasLink.reduce(function(p, c) { return p || c; }))
+					||
+					(obj.type !== 'kanji'
+						&& readingNodeHasLink.reduce(function(p, c) { return p || c; }))
 					;
 				});
 				data.links = data.links.filter(function(obj) {
-					return that.includeKanji.indexOf(obj.source) !== -1
-							|| that.includeKanji.indexOf(obj.target) !== -1;
+					return (that.includeKanji.indexOf(obj.source) !== -1
+							|| that.includeKanji.indexOf(obj.target) !== -1);
 				});
-			}
+			}*/
 			return data;
 		}
 	}
 
-	var kunFilter = new Filter({excludeReading: 'on',
-								excludeKanji: '',
-								includeKanji: '一育'});
-	var onFilter = new Filter({excludeReading: 'kun',
-								excludeKanji: '',
-								includeKanji: ''});
+	var kanjiLimit = '日一人年大十二本中出三見月生五上四金九入学円子八六下気小七山女百先名川千水男校土木車白天火右左休立手力目田正文口町空雨足早字音花赤青村夕石竹森林王犬玉草耳虫糸貝';
+	var includeKanji = allKanji;
+	for (i in kanjiLimit) {
+		includeKanji = includeKanji.replace(kanjiLimit[i], 's');
+	}
 
-	var data = kunFilter.process(data);
+	var preFilter = new Filter({excludeReading: '',
+								excludeKanji: includeKanji});
+	var kunFilter = new Filter({excludeReading: 'on',
+								excludeKanji: ''});
+	var onFilter = new Filter({excludeReading: 'kun',
+								excludeKanji: ''});
+
+	var data = (preFilter.process(data));
 
 	var svg = d3.select('#content').append('svg');
 
