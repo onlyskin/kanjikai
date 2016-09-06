@@ -31,19 +31,19 @@ div #toggleWrapper {
 }
 
 .kanji {
-	font-size: 20px;
+	font-size: 30px;
 	fill: red;
 	font-family: serif;	
 }
 
 .on {
-	font-size: 30px;
+	font-size: 12px;
 	fill: green;
 	font-family: sans-serif;
 }
 
 .kun {
-	font-size: 20px;
+	font-size: 12px;
 	fill: blue;	
 	font-family: serif;	
 }

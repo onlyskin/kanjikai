@@ -43,3 +43,25 @@
 		update();
 
 	};
+
+
+removed from the filter function:
+/*			//Remove any kanji not in the include list if not ''
+			if (this.includeKanji !== '') {
+				includeKanjiList = that.includeKanji.split('')
+				data.nodes = data.nodes.filter(function(obj) {
+					readingNodeHasLink = includeKanjiList.map(function(item) {
+						return linkExists(item, obj.id, data);
+					});
+					return (obj.type === 'kanji'
+						&& that.includeKanji.indexOf(obj.id) !== -1)
+					||
+					(obj.type !== 'kanji'
+						&& readingNodeHasLink.reduce(function(p, c) { return p || c; }))
+					;
+				});
+				data.links = data.links.filter(function(obj) {
+					return (that.includeKanji.indexOf(obj.source) !== -1
+							|| that.includeKanji.indexOf(obj.target) !== -1);
+				});
+			}*/
