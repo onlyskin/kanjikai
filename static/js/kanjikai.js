@@ -93,7 +93,7 @@ d3.json('static/data/large.json', function(response) {
 								includeKanji: ''});
 
 	var data = preFilter.process(data);
-	var data = onFilter.process(data);
+	var data = kunFilter.process(data);
 
 	var svg = d3.select('#content').append('svg');
 
@@ -182,64 +182,45 @@ d3.json('static/data/large.json', function(response) {
 			  .attr('r', function(d) { return circleRadius[d.type] });
 
 		newNodeGroups.on('click', function(d, i) {
-			  	var currentNode = this;
-			  	var currentDatum = d;
-			  	var fade = 0.1;
+			var fade = 0.1;
+		  	var currentNodeId = d.id;
+		  	function getLinkedNodes(node) {
+		  		return d.type === 'kanji' ? kToR[node.id] : rToK[node.id];
+		  	};
+		  	var linkedNodeIds = getLinkedNodes(d);
+		  	var noFadeNodes = linkedNodeIds;
+		  	noFadeNodes.push(currentNodeId);
 
-			  	nodeGroup.selectAll('circle')
-			  		.filter( function(d,i) {
-			  			var thisNode = (this == currentNode)
-			  			var linkFound = false;
-		  				for (var j = 0; j < data.links.length; j++)
-		  					{ if ((data.links[j].target.id == currentDatum.id
-		  						  &&
-		  						  data.links[j].source.id == d.id)
-		  						  ||
-		  						  (data.links[j].source.id == currentDatum.id
-		  						  &&
-		  						  data.links[j].target.id == d.id)
-		  						  )
-		  						  { linkFound = true; }
-		  					}
-			  			return !thisNode && !linkFound;
-			  		})
-		  			.transition()
-		  			.style('opacity', fade);
+		  	nodeGroup.selectAll('circle')
+		  		.filter( function (d, i) {
+		  			return noFadeNodes.indexOf(d.id) === -1;
+		  		})
+	  			.transition()
+	  			.style('opacity', fade);
 
-			  	nodeGroup.selectAll('text')
-			  		.filter( function(d,i) {
-			  			var thisNode = (this.parentNode == currentNode.parentNode)
-			  			var linkFound = false;
-		  				for (var j = 0; j < data.links.length; j++)
-		  					{ if ((data.links[j].target.id == currentDatum.id
-		  						  &&
-		  						  data.links[j].source.id == d.id)
-		  						  ||
-		  						  (data.links[j].source.id == currentDatum.id
-		  						  &&
-		  						  data.links[j].target.id == d.id)
-		  						  )
-		  						  { linkFound = true; }
-		  					}
-		  				return !thisNode && !linkFound;
-			  		})
-		  			.transition()
-		  			.style('opacity', fade);
+		  	nodeGroup.selectAll('text')
+		  		.filter( function (d, i) {
+		  			return noFadeNodes.indexOf(d.id) === -1;
+		  		})
+	  			.transition()
+	  			.style('opacity', fade);
 
-			  	linkGroup.selectAll('line')
-			  		.filter( function(d,i) {
-			  			return (d.target.id != currentDatum.id);
-			  		})
-		  			.transition()
-		  			.style('opacity', fade);
+		  	linkGroup.selectAll('line')
+		  		.filter( function (d, i) {
+		  			return (noFadeNodes.indexOf(d.source.id) === -1
+		  					||
+		  					noFadeNodes.indexOf(d.target.id) === -1);
+		  		})
+	  			.transition()
+	  			.style('opacity', fade);
 
-			  })
+		  })
 
 		newNodeGroups.on('blur', function() {
-			  	nodeGroup.selectAll('circle').transition().style('opacity', 1);
-			  	nodeGroup.selectAll('text').transition().style('opacity', 1);
-			  	linkGroup.selectAll('line').transition().style('opacity', 1);
-			  });
+		  	nodeGroup.selectAll('circle').transition().style('opacity', 1);
+		  	nodeGroup.selectAll('text').transition().style('opacity', 1);
+		  	linkGroup.selectAll('line').transition().style('opacity', 1);
+		  });
 
 		var circles = nodeGroup.selectAll('circle');
 		var text = nodeGroup.selectAll('text');

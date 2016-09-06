@@ -1,5 +1,5 @@
 To Do:
-- fix bugs and refactor the node and link highlighting
+- fix bug with and refactor the node and link highlighting
 - fix updating of d3 diagram when data changes
 - add in-page functionality to change on/kun exclude/include lists
 - allow focusing on a specific kanji/reading and seeing x degrees
