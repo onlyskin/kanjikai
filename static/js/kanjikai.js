@@ -1,6 +1,6 @@
 d3.json('static/data/large.json', function(response) {
 
-//	originalData = JSON.parse(JSON.stringify(response));
+	originalData = JSON.parse(JSON.stringify(response));
 
 	var data = response;
 
@@ -68,6 +68,7 @@ d3.json('static/data/large.json', function(response) {
 			})
 			.map(function(obj) { return obj.id; });
 
+			console.log(data);
 			//removes any links whose source and target nodes are no
 			//longer present (must be run at end of function)
 			data.links = data.links.filter(function(obj) {
@@ -75,12 +76,12 @@ d3.json('static/data/large.json', function(response) {
 						&&
 						readingNodes.indexOf(obj.target) !== -1);
 			});
-
+			console.log(data);
 			return data;
 		}
 	}
 
-	var includeKanji = '歳与違欧被渡含況突湾捜超療捕介迎販幅彼般舞込換占頼途抜伸爆普婚齢浮押倒了患絡募払昇遅香更抱恐戻巨震越企触依籍汚互沢逃援傾施緒跡駐紹井雇';
+	var includeKanji = '別特料建試験英議民連選関戦最約';
 
 	var preFilter = new Filter({excludeReading: '',
 								excludeKanji: '',
@@ -92,8 +93,8 @@ d3.json('static/data/large.json', function(response) {
 								excludeKanji: '',
 								includeKanji: ''});
 
-	var data = preFilter.process(data);
-	var data = kunFilter.process(data);
+	data = preFilter.process(data);
+//	data = onFilter.process(data);
 
 	var svg = d3.select('#content').append('svg');
 
@@ -132,34 +133,37 @@ d3.json('static/data/large.json', function(response) {
 	var g = svg.append('g')
 		.attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
 
-	var simulation = d3.forceSimulation()
-		.force('link', d3.forceLink()
-			.id(function(d) { return d.id; })
-			.distance(30)
-			)
-		.force('charge', d3.forceManyBody().strength(-30))
-		.force('collide', d3.forceCollide(35))
-	//    .force('center', d3.forceCenter(width / 2, height / 2))
-	    .stop();
-
 	var linkGroup = g.append('g')
 		  .attr('class', 'links');
 
 	var nodeGroup = g.append('g')
 		  .attr('class', 'nodes');
 
+	var simulation = d3.forceSimulation()
+		.force('link', d3.forceLink()
+			.id(function(d) { return d.id; })
+			.distance(30)
+			)
+		.force('charge', d3.forceManyBody().strength(-30))
+		.force('collide', d3.forceCollide(35));
+	//    .force('center', d3.forceCenter(width / 2, height / 2))
+
+	simulation
+		.nodes(data.nodes, function(d) { return d.id; });
+
+	simulation.force('link')
+		.links(data.links, function(d) { return d.source.id+'-'+d.target.id; });
+
 	function update() {
 
 		simulation
-			.nodes(data.nodes);
+			.nodes(data.nodes, function(d) { return d.id; });
 
 		simulation.force('link')
-			.links(data.links);
-
-		simulation.restart();
+			.links(data.links, function(d) { return d.source.id+'-'+d.target.id; });
 
 		var allLinks = linkGroup.selectAll('line')
-			.data(data.links, function(d) { return d.source+'-'+d.target; });
+			.data(data.links, function(d) { return d.source.id+'-'+d.target.id; });
 
 		allLinks.exit().remove();
 
@@ -167,7 +171,7 @@ d3.json('static/data/large.json', function(response) {
 			.attr('class', 'link');
 
 		var pointGroup = nodeGroup.selectAll('.node')
-			.data(data.nodes, function(d) { return d ? d.id : this.id; });
+			.data(data.nodes, function(d) { return d.id; });
 
 		pointGroup.exit().remove();
 
@@ -222,6 +226,10 @@ d3.json('static/data/large.json', function(response) {
 		  	linkGroup.selectAll('line').transition().style('opacity', 1);
 		  });
 
+		simulation
+			.on('tick', ticked)
+			.restart();
+
 		var circles = nodeGroup.selectAll('circle');
 		var text = nodeGroup.selectAll('text');
 		var lines = linkGroup.selectAll('line');
@@ -242,11 +250,17 @@ d3.json('static/data/large.json', function(response) {
 		        .attr("y", function(d) { return d.y; });
 		}
 
-		simulation
-			.on('tick', ticked)
-			.restart();
 	};
 
 	update();
+
+	checkbox = document.getElementById('checkbox');
+	checkbox.onchange = function() {
+
+		data = preFilter.process(originalData);
+		data = onFilter.process(originalData);
+		update();
+
+	};
 
 });

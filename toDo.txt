@@ -1,6 +1,12 @@
 To Do:
-- fix bug with and refactor the node and link highlighting
+- write a very basic example of a force layout with an update to see what's going on
+
 - fix updating of d3 diagram when data changes
+- add in-page functionality to change the force diagram parameters
+so we can experiment
+- add in-page functionality to toggle view of meaning of kanji
+- add in-page functionality to toggle from hiragana and katakana
+to romaji
 - add in-page functionality to change on/kun exclude/include lists
 - allow focusing on a specific kanji/reading and seeing x degrees
 of separation
