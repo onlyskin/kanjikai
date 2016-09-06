@@ -33,27 +33,21 @@ d3.json('static/data/large.json', function(response) {
 		this.includeKanji = settings.includeKanji;
 		this.process = function(data) {
 			var that = this;
-			//Remove either 'on' or 'kun' readings
-			data.nodes = data.nodes.filter(function(obj) {
-				return obj.type !== that.excludeReading && obj.type!== "unknown";
-			});
-			data.links = data.links.filter(function(obj) {
-				return obj.type !== that.excludeReading && obj.type!== "unknown";
-			});
 
-			//Remove any kanji in the exclude list
+			//Remove either 'on' or 'kun' (nodes)
+			data.nodes = data.nodes.filter(function(obj) {
+				return obj.type !== that.excludeReading && obj.type !== "unknown";
+			});
+			//Remove any kanji in the exclude list (nodes)
 			data.nodes = data.nodes.filter(function(obj) {
 				return that.excludeKanji.indexOf(obj.id) === -1;
 			});
-			data.links = data.links.filter(function(obj) {
-				return that.excludeKanji.indexOf(obj.source) === -1
-						&& that.excludeKanji.indexOf(obj.target) === -1;
-			});
 
-			if (includeKanji !== '') {
+			//Removes any kanji not in the include list (nodes)
+			if (that.includeKanji !== '') {
 				var includeReadings = [];
-				for (i in includeKanji) {
-					var kanji = includeKanji[i];
+				for (i in that.includeKanji) {
+					var kanji = that.includeKanji[i];
 					includeReadings.push.apply(includeReadings, kToR[kanji]);
 				}
 				data.nodes = data.nodes.filter(function(obj) {
@@ -61,18 +55,32 @@ d3.json('static/data/large.json', function(response) {
 							||
 							includeReadings.indexOf(obj.id) !== -1);
 				});
-				data.links = data.links.filter(function(obj) {
-					return (that.includeKanji.indexOf(obj.source) !== -1
-							&&
-							includeReadings.indexOf(obj.target) !== -1);
-				});
 			}
+
+			//builds list of kanji and reading nodes for filtering links at end
+			kanjiNodes = data.nodes.filter(function(obj) {
+				return obj.type === 'kanji';
+			})
+			.map(function(obj) { return obj.id; });
+
+			readingNodes = data.nodes.filter(function(obj) {
+				return obj.type === 'kun' || obj.type === 'on';
+			})
+			.map(function(obj) { return obj.id; });
+
+			//removes any links whose source and target nodes are no
+			//longer present (must be run at end of function)
+			data.links = data.links.filter(function(obj) {
+				return (kanjiNodes.indexOf(obj.source) !== -1
+						&&
+						readingNodes.indexOf(obj.target) !== -1);
+			});
 
 			return data;
 		}
 	}
 
-	var includeKanji = '日一国会人年大十二本中長出三同時政事自行社見月分議後前民生連五発間対上部東者党地合市業内相方四定今回新場金員九入選立開手米力学問高代明実円関決子動京全目表戦経通外最言氏現理調体化田当八六約主題下首意法不来作性的要用制治度務強気小七成期公持野協取都和統以機平総加山思家話世受区領多県続進正安設保改数記院女初北午指権心界支第産結百派点教報済書府活原先共得解名交資予川向際査勝面委告軍文反元重近千考判認画海参売利組知案道信策集在件団別物側任引使求所次水半品昨論計死官増係感特情投示変打男基私各始島直両朝革価式確村提運終挙果西勢減台広容必応演電歳住争談能無再位置企真流格有疑口過局少放税検藤町常校料沢裁状工建語球営空職証土与急止送援供可役構木割聞身費付施切由説転食比難防補車優夫研収断井何南石足違消境神番規術護展態導鮮備宅害配副算視条幹独警宮究育席輸訪楽起万着乗店述残想線率病農州武声質念待試族象銀域助労例衛然早張映限親額監環験追審商葉義伝働形景落欧担好退準賞訴辺造英被株頭技低毎医復仕去姿味負閣韓渡失移差衆個門写評課末守若脳極種美岡影命含福蔵量望松非撃佐核観察整段横融型白深字答夜製票況音申様財港識注呼渉達';
+	var includeKanji = '歳与違欧被渡含況突湾捜超療捕介迎販幅彼般舞込換占頼途抜伸爆普婚齢浮押倒了患絡募払昇遅香更抱恐戻巨震越企触依籍汚互沢逃援傾施緒跡駐紹井雇';
 
 	var preFilter = new Filter({excludeReading: '',
 								excludeKanji: '',
@@ -85,7 +93,7 @@ d3.json('static/data/large.json', function(response) {
 								includeKanji: ''});
 
 	var data = preFilter.process(data);
-//	var data = onFilter.process(data);
+	var data = onFilter.process(data);
 
 	var svg = d3.select('#content').append('svg');
 

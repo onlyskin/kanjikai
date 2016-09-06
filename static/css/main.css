@@ -37,13 +37,13 @@ div #toggleWrapper {
 }
 
 .on {
-	font-size: 12px;
+	font-size: 14px;
 	fill: green;
 	font-family: sans-serif;
 }
 
 .kun {
-	font-size: 12px;
+	font-size: 14px;
 	fill: blue;	
 	font-family: serif;	
 }
