@@ -1,9 +1,8 @@
 To Do:
-- write a very basic example of a force layout with an update to see what's going on
 
-- fix updating of d3 diagram when data changes
+- fix updating of d3 diagram when data changes - done for nodes, need to work on links
 - add in-page functionality to change the force diagram parameters
-so we can experiment
+so we can experiment  STARTED - list other parameters to add
 - add in-page functionality to toggle view of meaning of kanji
 - add in-page functionality to toggle from hiragana and katakana
 to romaji
