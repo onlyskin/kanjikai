@@ -4,7 +4,11 @@ d3.json('static/data/large.json', function(response) {
 
 	var data = response;
 
-	currentFilters = [];
+	filters = {
+		on: false,
+		kun: false,
+		kanji: ''
+	};
 
 	//sets up kanji to reading and reading to kanji dictionaries from the data
 	var kToR = {};
@@ -34,7 +38,6 @@ d3.json('static/data/large.json', function(response) {
 		this.excludeKanji = settings.excludeKanji;
 		this.includeKanji = settings.includeKanji;
 		this.process = function(data) {
-			currentFilters.push(this);
 			var that = this;
 
 			//Remove either 'on' or 'kun' (nodes)
@@ -104,29 +107,30 @@ d3.json('static/data/large.json', function(response) {
 								excludeKanji: '',
 								includeKanji: ''});
 
-	var grade1 = new Filter({excludeReading: '',
+	var grade1Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade1});
-	var grade2 = new Filter({excludeReading: '',
+	var grade2Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade2});
-	var grade3 = new Filter({excludeReading: '',
+	var grade3Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade3});
-	var grade4 = new Filter({excludeReading: '',
+	var grade4Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade4});
-	var grade5 = new Filter({excludeReading: '',
+	var grade5Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade5});
-	var grade6 = new Filter({excludeReading: '',
+	var grade6Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade6});
-	var grade7 = new Filter({excludeReading: '',
+	var grade7Filter = new Filter({excludeReading: '',
 								excludeKanji: '',
 								includeKanji: grade7});
 
-	var data = grade1.process(data);
+	var data = grade1Filter.process(data);
+	filters.kanji = grade1;
 //	var data = onFilter.process(data);
 
 	var svg = d3.select('#content').append('svg');
@@ -283,18 +287,20 @@ d3.json('static/data/large.json', function(response) {
 			  .append('line')
 			.attr('class', 'link');
 
+	console.log(filters);
+
 	};
 
 	update();
-	console.log(currentFilters);
 
 	removeKun = document.getElementById('removeKun');
 	removeKun.onchange = function() {
 
 		if (this.checked) {
-		data = onFilter.process(data);
+			data = onFilter.process(data);
+			filters.on = true;
 		}
-		else {
+/*		else {
 			data = originalData;
 			currentFilters.pop();
 			for (i in currentFilters) {
@@ -302,7 +308,7 @@ d3.json('static/data/large.json', function(response) {
 				data = filter.process(data);
 			}
 		}
-		update();
+*/		update();
 
 	};
 

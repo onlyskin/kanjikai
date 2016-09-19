@@ -1,6 +1,6 @@
 To Do:
 
-- fix updating of d3 diagram when data changes - done for nodes, need to work on links
+- fix updating so that 'updating' nodes and links in the data are copied over
 - add in-page functionality to change the force diagram parameters
 so we can experiment  STARTED - list other parameters to add
 - add in-page functionality to toggle view of meaning of kanji
@@ -9,3 +9,4 @@ to romaji
 - add in-page functionality to change on/kun exclude/include lists
 - allow focusing on a specific kanji/reading and seeing x degrees
 of separation
+- fix zooming/panning

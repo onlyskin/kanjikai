@@ -19,7 +19,7 @@ div #controls {
 
 .links line {
   stroke: #aaa;
-  stroke-width: 1;
+  stroke-width: 3;
 }
 
 .nodes circle {
