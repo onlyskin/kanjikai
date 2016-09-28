@@ -8,6 +8,7 @@
 
 	  <link rel="stylesheet" href="static/css/main.css"/>
 	  <script src="static/js/d3.js"></script>
+	  <link rel='shortcut icon' type='image/ico' href='favicon.ico' />
 
   </head>
 
@@ -18,10 +19,16 @@
   		</div>
   		<div id="controls">
   			<div>
-	  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
+	  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="0"><label for="manyBodyStrenghtInput">Charge Strength</label>
 	  		</div>
   			<div>
-	  			<input id="removeKun" type="checkbox"> <label for="removeKun">Remove Kun</label>
+	  			<input type="range" id="collideRadius" min="0" max="100" step="5" value="35"><label for="collideRadius">Collide Radius</label>
+	  		</div>
+  			<div>
+	  			<input type="range" id="linkDistance" min="0" max="200" step="5" value="30"><label for="linkDistance">Link Distance</label>
+	  		</div>
+  			<div>
+	  			<input id="removeKun" type="checkbox" > <label for="removeKun">Remove Kun</label>
 	  		</div>
   		</div>
 	  	<div id="content">
@@ -29,6 +36,7 @@
 	</div>
 
 	  <script src="static/js/kanjikai.js"></script>
+	  <script src="static/js/toggles.js"></script>
   </body>
 
 </html>

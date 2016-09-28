@@ -4,6 +4,8 @@ d3.json('static/data/large.json', function(response) {
 
 	var data = response;
 
+	//object to record filters currently applied - you must apply manually
+	//on user inputs of filters or when calling a filter manually in the code
 	filters = {
 		on: false,
 		kun: false,
@@ -129,9 +131,10 @@ d3.json('static/data/large.json', function(response) {
 								excludeKanji: '',
 								includeKanji: grade7});
 
-	var data = grade1Filter.process(data);
+	data = grade1Filter.process(data);
 	filters.kanji = grade1;
-//	var data = onFilter.process(data);
+//	data = onFilter.process(data);
+//	filters.on = true;
 
 	var svg = d3.select('#content').append('svg');
 
@@ -179,8 +182,9 @@ d3.json('static/data/large.json', function(response) {
 	var simulation = d3.forceSimulation();
 
 	simulation.nodes();
-	simulation.force('charge', d3.forceManyBody().strength(-100))
-	simulation.force('collide', d3.forceCollide(35))
+	simulation.force('center', d3.forceCenter(0, 0));
+	simulation.force('charge', d3.forceManyBody().strength(0));
+	simulation.force('collide', d3.forceCollide(35));
 	simulation.on('tick', ticked);
 
 	function ticked() {
@@ -293,6 +297,46 @@ d3.json('static/data/large.json', function(response) {
 
 	update();
 
+	//updates data so that any nodes/links that were filtered out are
+	//put back, without altering the currently present data
+	function unfilter() {
+		simulation.stop()
+
+		var nodesCopy = data.nodes;
+		data.nodes = originalData.nodes;
+		var nodesCopyMap = nodesCopy.map(function(obj) { return obj.id; });
+
+		for (i in data.nodes) {
+			if (nodesCopyMap.indexOf(data.nodes[i].id) !== -1) {
+				data.nodes[i] = nodesCopy[nodesCopyMap.indexOf(data.nodes[i].id)];
+			}
+		}
+
+		data.links = originalData.links;
+
+
+		//reset all filters
+		filters.on = false;
+		filters.kun = false;
+		filters.kanji = '';
+
+		update();
+	}
+
+	function reapplyFilters() {
+
+		data = grade1Filter.process(data);
+		filters.kanji = grade1;
+
+		update();		
+	}
+
+//	setTimeout(function() {
+//		console.log('unfilter');
+//		unfilter();
+//		console.log(data.nodes);
+//	}, 2000);
+
 	removeKun = document.getElementById('removeKun');
 	removeKun.onchange = function() {
 
@@ -300,24 +344,14 @@ d3.json('static/data/large.json', function(response) {
 			data = onFilter.process(data);
 			filters.on = true;
 		}
-/*		else {
-			data = originalData;
-			currentFilters.pop();
-			for (i in currentFilters) {
-				filter = currentFilters[i];
-				data = filter.process(data);
-			}
+		else {
+			unfilter()
+			reapplyFilters()
 		}
-*/		update();
+		update();
 
 	};
 
-	manyBodyStrenghtInput = document.getElementById('manyBodyStrenghtInput');
-	manyBodyStrenghtInput.onchange = function() {
+	setUpToggles(simulation);
 
-		simulation.force('charge').strength(this.value);
-
-		simulation.alpha(1).restart();
-
-	};
 });
