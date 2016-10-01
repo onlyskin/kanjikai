@@ -17,6 +17,10 @@ div #controls {
 	margin: 0 auto;
 }
 
+div .control-float {
+	float: left;
+}
+
 .links line {
   stroke: #aaa;
   stroke-width: 3;
@@ -28,12 +32,14 @@ div #controls {
 }
 
 .nodes text {
+	text-anchor: middle;
+	alignment-baseline: middle;
 }
 
 .kanji {
 	font-size: 30px;
 	fill: red;
-	font-family: serif;	
+	font-family: sans-serif;	
 }
 
 .on {

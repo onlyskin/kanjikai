@@ -1,12 +1,17 @@
 To Do:
 
-- fix updating so that 'updating' nodes and links in the data are copied over
+- make a new filter function which can filter on arbitrary lists of kanji passed to it from the filter
 - add in-page functionality to change the force diagram parameters
 so we can experiment  STARTED - list other parameters to add
+- change so that kanji have a greater collid radius to other kanji
 - add in-page functionality to toggle view of meaning of kanji
 - add in-page functionality to toggle from hiragana and katakana
 to romaji
-- add in-page functionality to change on/kun exclude/include lists
 - allow focusing on a specific kanji/reading and seeing x degrees
 of separation
 - fix zooming/panning
+- have added nodes appear at random positions in the screen, not all at 0, 0
+- fix the unfocusing on nodes behaviour when you click to pan
+
+some sample parameters:
+ON: collide radius: 50, link distance: 40

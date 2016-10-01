@@ -133,8 +133,6 @@ d3.json('static/data/large.json', function(response) {
 
 	data = grade1Filter.process(data);
 	filters.kanji = grade1;
-//	data = onFilter.process(data);
-//	filters.on = true;
 
 	var svg = d3.select('#content').append('svg');
 
@@ -142,9 +140,9 @@ d3.json('static/data/large.json', function(response) {
 	var height = window.innerHeight * 0.8;
 
 	var circleRadius = {
-					'kanji': 8,
-					'on': 4,
-					'kun': 4
+					'kanji': 0,
+					'on': 0,
+					'kun': 0
 					};
 
 	svg.attr('height', height)
@@ -183,8 +181,8 @@ d3.json('static/data/large.json', function(response) {
 
 	simulation.nodes();
 	simulation.force('center', d3.forceCenter(0, 0));
-	simulation.force('charge', d3.forceManyBody().strength(0));
-	simulation.force('collide', d3.forceCollide(35));
+	simulation.force('charge', d3.forceManyBody().strength(0).distanceMax(50));
+	simulation.force('collide', d3.forceCollide(50));
 	simulation.on('tick', ticked);
 
 	function ticked() {
@@ -210,7 +208,7 @@ d3.json('static/data/large.json', function(response) {
 
 		simulation.force('link', d3.forceLink(data.links)
 				.id(function(d) { return d.id; })
-				.distance(30)
+				.distance(40)
 				);
 
 		simulation.alpha(1).restart();
@@ -230,7 +228,7 @@ d3.json('static/data/large.json', function(response) {
 			.attr('class', 'node');
 
 		newTextElements = nodesEnterSelection.append('text')
-			  .text(function(d) { return d.id; })
+			  .text(function(d) { return kanaToRomaji(d.id); })
 			  .attr('class', function(d) { return d.type; });
 
 		newCircleElements = nodesEnterSelection.append('circle')
@@ -291,14 +289,13 @@ d3.json('static/data/large.json', function(response) {
 			  .append('line')
 			.attr('class', 'link');
 
-	console.log(filters);
-
 	};
 
 	update();
 
 	//updates data so that any nodes/links that were filtered out are
-	//put back, without altering the currently present data
+	//put back, without altering the currently present data, usually
+	//reapplyFilters will need to be called afterwards
 	function unfilter() {
 		simulation.stop()
 
@@ -307,51 +304,30 @@ d3.json('static/data/large.json', function(response) {
 		var nodesCopyMap = nodesCopy.map(function(obj) { return obj.id; });
 
 		for (i in data.nodes) {
-			if (nodesCopyMap.indexOf(data.nodes[i].id) !== -1) {
-				data.nodes[i] = nodesCopy[nodesCopyMap.indexOf(data.nodes[i].id)];
+			var tempIndex = nodesCopyMap.indexOf(data.nodes[i].id);
+			if (tempIndex !== -1) {
+				data.nodes[i] = nodesCopy[tempIndex];
 			}
 		}
 
 		data.links = originalData.links;
 
-
-		//reset all filters
-		filters.on = false;
-		filters.kun = false;
-		filters.kanji = '';
-
 		update();
 	}
 
+	//refilters the data according to the current parameters on the
+	//filters object - to be used after unfilter. The actually setting
+	//of parameters on the filters object should be done outside
+	//these two functions - e.g. by the onchange watcher for the UI
 	function reapplyFilters() {
 
-		data = grade1Filter.process(data);
-		filters.kanji = grade1;
+		if (filters.on === true) { data = onFilter.process(data); }
+		if (filters.kun === true) { data = kunFilter.process(data); }
+		if (filters.kanji === grade1) { data = grade1Filter.process(data); }
 
 		update();		
 	}
 
-//	setTimeout(function() {
-//		console.log('unfilter');
-//		unfilter();
-//		console.log(data.nodes);
-//	}, 2000);
-
-	removeKun = document.getElementById('removeKun');
-	removeKun.onchange = function() {
-
-		if (this.checked) {
-			data = onFilter.process(data);
-			filters.on = true;
-		}
-		else {
-			unfilter()
-			reapplyFilters()
-		}
-		update();
-
-	};
-
-	setUpToggles(simulation);
+	setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters);
 
 });
