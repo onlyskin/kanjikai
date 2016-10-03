@@ -1,4 +1,12 @@
-function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters) {
+function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters, romajiToggle) {
+
+	romajiToggle.onchange = function() {
+		d3.selectAll('.node text.on, text.kun')
+		  .text(function(d) {
+		  	if (romajiToggle.checked) { return kanaToRomaji(d.id); }
+		  	else { return d.id; }
+		  });
+	};
 
 	var Kun = document.getElementById('Kun');
 	Kun.onchange = function() {

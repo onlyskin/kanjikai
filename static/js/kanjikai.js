@@ -12,6 +12,8 @@ d3.json('static/data/large.json', function(response) {
 		kanji: ''
 	};
 
+	var romajiToggle = document.getElementById('romajiToggle');
+
 	//sets up kanji to reading and reading to kanji dictionaries from the data
 	var kToR = {};
 	var rToK = {};
@@ -238,7 +240,10 @@ d3.json('static/data/large.json', function(response) {
 			  .style('stroke-width', 3);
 
 		newTextElements = nodesEnterSelection.append('text')
-			  .text(function(d) { return kanaToRomaji(d.id); })
+			  .text(function(d) {
+			  	if (romajiToggle.checked) { return kanaToRomaji(d.id); }
+			  	else { return d.id; }
+			  })
 			  .attr('class', function(d) { return d.type; });
 
 		newMeaningElements = nodesEnterSelection.append('g')
@@ -341,6 +346,6 @@ d3.json('static/data/large.json', function(response) {
 		update();		
 	}
 
-	setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters);
+	setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters, romajiToggle);
 
 });

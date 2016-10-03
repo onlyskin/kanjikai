@@ -1,7 +1,6 @@
 To Do:
 
 visual:
-- implement button to move between kana and romaji
 - make borders on lines
 
 - make a new filter function which can filter on arbitrary lists of kanji passed to it from the filter
