@@ -8,6 +8,13 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		  });
 	};
 
+	meaningsToggle.onchange = function() {
+		d3.selectAll('.node text.meaning')
+		  .text(function(d) {
+		  	if (meaningsToggle.checked) { return d.meaning; }
+		  });
+	};
+
 	var Kun = document.getElementById('Kun');
 	Kun.onchange = function() {
 		if (!this.checked) {

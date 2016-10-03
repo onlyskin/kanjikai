@@ -13,6 +13,7 @@ d3.json('static/data/large.json', function(response) {
 	};
 
 	var romajiToggle = document.getElementById('romajiToggle');
+	var meaningsToggle = document.getElementById('meaningsToggle');
 
 	//sets up kanji to reading and reading to kanji dictionaries from the data
 	var kToR = {};
@@ -249,7 +250,7 @@ d3.json('static/data/large.json', function(response) {
 		newMeaningElements = nodesEnterSelection.append('g')
 			  .attr('transform', 'translate(0,22)')
 				.append('text')
-			  .text(function(d) { if (d.meaning) {return d.meaning;} })
+			  .text(function(d) { if (d.meaning && meaningsToggle.checked) { return d.meaning; } })
 			  .attr('class', function(d) { return 'meaning'; });
 
 		nodesEnterSelection.on('click', function(d, i) {
