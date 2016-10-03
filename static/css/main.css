@@ -29,6 +29,7 @@ div .control-float {
 .nodes circle {
   stroke: none;
   stroke-width: 40px;
+  fill: DarkSlateblue;
 }
 
 .nodes text {
@@ -38,18 +39,27 @@ div .control-float {
 
 .kanji {
 	font-size: 30px;
-	fill: red;
+	fill: Ivory;
 	font-family: sans-serif;	
 }
 
 .on {
-	font-size: 14px;
-	fill: green;
+	font-size: 10px;
+	fill: FireBrick;
 	font-family: sans-serif;
+	font-weight: 600;
 }
 
 .kun {
+	font-size: 10px;
+	fill: ForestGreen;	
+	font-family: sans-serif;	
+	font-weight: 600;
+}
+
+.meaning {
 	font-size: 14px;
-	fill: blue;	
-	font-family: serif;	
+	fill: black;	
+	font-family: sans-serif;
+	font-weight: 1200;
 }

@@ -140,7 +140,7 @@ d3.json('static/data/large.json', function(response) {
 	var height = window.innerHeight * 0.8;
 
 	var circleRadius = {
-					'kanji': 0,
+					'kanji': 21,
 					'on': 0,
 					'kun': 0
 					};
@@ -181,8 +181,8 @@ d3.json('static/data/large.json', function(response) {
 
 	simulation.nodes();
 	simulation.force('center', d3.forceCenter(0, 0));
-	simulation.force('charge', d3.forceManyBody().strength(0).distanceMax(50));
-	simulation.force('collide', d3.forceCollide(50));
+	simulation.force('charge', d3.forceManyBody().strength(100).distanceMax(50));
+	simulation.force('collide', d3.forceCollide(30));
 	simulation.on('tick', ticked);
 
 	function ticked() {
@@ -208,7 +208,10 @@ d3.json('static/data/large.json', function(response) {
 
 		simulation.force('link', d3.forceLink(data.links)
 				.id(function(d) { return d.id; })
-				.distance(40)
+				.distance(0)
+				.strength(function(link) {
+					return 1;
+				})
 				);
 
 		simulation.alpha(1).restart();
@@ -227,12 +230,22 @@ d3.json('static/data/large.json', function(response) {
 			  .append('g')
 			.attr('class', 'node');
 
+		newCircleElements = nodesEnterSelection.append('g')
+			  .attr('transform', 'translate(0,-3)')
+			  	.append('circle')
+			  .attr('r', function(d) { return circleRadius[d.type] })
+			  .style('stroke', 'PowderBlue')
+			  .style('stroke-width', 3);
+
 		newTextElements = nodesEnterSelection.append('text')
 			  .text(function(d) { return kanaToRomaji(d.id); })
 			  .attr('class', function(d) { return d.type; });
 
-		newCircleElements = nodesEnterSelection.append('circle')
-			  .attr('r', function(d) { return circleRadius[d.type] });
+		newMeaningElements = nodesEnterSelection.append('g')
+			  .attr('transform', 'translate(0,22)')
+				.append('text')
+			  .text(function(d) { if (d.meaning) {return d.meaning;} })
+			  .attr('class', function(d) { return 'meaning'; });
 
 		nodesEnterSelection.on('click', function(d, i) {
 			var fade = 0.1;

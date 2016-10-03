@@ -1,3 +1,5 @@
+breakSymbol = '_';
+
 var kanaMain = {あ: 'a',
 い: 'i',
 う: 'u',
@@ -42,7 +44,7 @@ var kanaMain = {あ: 'a',
 ゆ: 'yu',
 よ: 'yo',
 わ: 'wa',
-ん: 'n.',
+ん: 'n',
 が: 'ga',
 ぎ: 'gi',
 ぐ: 'gu',
@@ -112,7 +114,7 @@ var kanaMain = {あ: 'a',
 ユ: 'YU',
 ヨ: 'YO',
 ワ: 'WA',
-ン: 'N.',
+ン: 'N',
 ガ: 'GA',
 ギ: 'GI',
 グ: 'GU',
@@ -227,17 +229,20 @@ function kanaToRomaji(input) {
 		output = output.replace(re, kanaMain[i]);
 	}
 
-	gemIndex = output.indexOf('っ');
-	while (gemIndex !== -1) {
-		output = output.replace('っ', output[gemIndex+1]);
-		gemIndex = output.indexOf('っ');
+	function checkGem(geminate) {
+		gemIndex = output.indexOf(geminate);
+		if (gemIndex === output.length-1) {
+			output = output.replace(geminate, breakSymbol);
+			gemIndex = output.indexOf(geminate);
+		};
+		while (gemIndex !== -1) {
+			output = output.replace(geminate, output[gemIndex+1]);
+			gemIndex = output.indexOf(geminate);
+		}
 	}
 
-	gemIndex = output.indexOf('ッ');
-	while (gemIndex !== -1) {
-		output = output.replace('ッ', output[gemIndex+1]);
-		gemIndex = output.indexOf('ッ');
-	}
+	checkGem('ッ');
+	checkGem('っ');
 
 	return output;
 
