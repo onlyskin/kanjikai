@@ -17,6 +17,9 @@
   		<div id="title">
   			<h1>Kanji-Kai</h1>
   		</div>
+  		<div class="kanjiInput">
+  			<input type="text" id="kanjiInput" disabled="disabled"></input>
+  		</div>
   		<div id="controls">
   			<div class="control-float">
 	  			<div>
@@ -28,7 +31,7 @@
 		  	</div>
   			<div class="control-float">
 	  			<div>
-		  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="0"><label for="manyBodyStrenghtInput">Charge Strength</label>
+		  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-20"><label for="manyBodyStrenghtInput">Charge Strength</label>
 		  		</div>
 	  			<div>
 		  			<input type="range" id="collideRadius" min="0" max="100" step="5" value="50"><label for="collideRadius">Collide Radius</label>
@@ -58,6 +61,7 @@
 	  	</div>
 	</div>
 
+	  <script src="static/js/main.js"></script>
 	  <script src="static/js/utilities.js"></script>
 	  <script src="static/js/kanjikai.js"></script>
 	  <script src="static/js/toggles.js"></script>

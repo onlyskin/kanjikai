@@ -17,13 +17,28 @@ div #controls {
 	margin: 0 auto;
 }
 
+div .kanjiInput {
+	width: 80%;
+	margin: 0 auto;
+	height: 20px;
+}
+
+#kanjiInput {
+	width: 100%;
+}
+
 div .control-float {
 	float: left;
 }
 
-.links line {
-  stroke: #aaa;
-  stroke-width: 3;
+.links line.linkInner {
+  stroke: #FCEABD;
+  stroke-width: 2;
+}
+
+.links line.linkOuter {
+  stroke: Indigo;
+  stroke-width: 4;
 }
 
 .nodes circle {
@@ -41,6 +56,11 @@ div .control-float {
 	font-size: 30px;
 	fill: Ivory;
 	font-family: sans-serif;	
+	text-shadow:
+   -1px -1px 0 black,  
+    1px -1px 0 black,
+    -1px 1px 0 black,
+     1px 1px 0 black;
 }
 
 .on {
@@ -48,6 +68,11 @@ div .control-float {
 	fill: FireBrick;
 	font-family: sans-serif;
 	font-weight: 600;
+	text-shadow:
+   -1px -1px 1px white,  
+    1px -1px 1px white,
+    -1px 1px 1px white,
+     1px 1px 1px white;
 }
 
 .kun {
@@ -55,6 +80,11 @@ div .control-float {
 	fill: ForestGreen;	
 	font-family: sans-serif;	
 	font-weight: 600;
+	text-shadow:
+   -1px -1px 1px white,  
+    1px -1px 1px white,
+    -1px 1px 1px white,
+     1px 1px 1px white;
 }
 
 .meaning {
@@ -62,4 +92,9 @@ div .control-float {
 	fill: black;	
 	font-family: sans-serif;
 	font-weight: 1200;
+	text-shadow:
+   -1px -1px 1px white,  
+    1px -1px 1px white,
+    -1px 1px 1px white,
+     1px 1px 1px white;
 }

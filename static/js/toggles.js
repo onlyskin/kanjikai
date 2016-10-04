@@ -1,4 +1,12 @@
-function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters, romajiToggle) {
+function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters, kanjiFilter) {
+
+	kanjiInput.oninput = function() {
+		filters.kanji = this.value;
+		console.log(filters.kanji);
+		unfilter();
+		reapplyFilters();
+		update();
+	};
 
 	romajiToggle.onchange = function() {
 		d3.selectAll('.node text.on, text.kun')
@@ -20,6 +28,8 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		if (!this.checked) {
 			data = onFilter.process(data);
 			filters.on = true;
+			//currently not reversible
+			this.disabled="disabled";
 		}
 		else {
 			filters.on = false;
@@ -34,6 +44,8 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		if (!this.checked) {
 			data = kunFilter.process(data);
 			filters.kun = true;
+			//currently not reversible
+			this.disabled="disabled";
 		}
 		else {
 			filters.kun = false;

@@ -247,3 +247,35 @@ function kanaToRomaji(input) {
 	return output;
 
 }
+
+function preProcessData(data) {
+
+	data.nodes = data.nodes.filter(function(obj) {
+		return obj.type !== 'unknown';
+	});
+
+	kanjiNodes = data.nodes.filter(function(obj) {
+		return obj.type === 'kanji';
+	})
+	.map(function(obj) { return obj.id; });
+
+	readingNodes = data.nodes.filter(function(obj) {
+		return obj.type === 'kun' || obj.type === 'on';
+	})
+	.map(function(obj) { return obj.id; });
+
+	data.links = data.links.filter(function(obj) {
+		if (typeof obj.source === 'string') {
+			return (kanjiNodes.indexOf(obj.source) !== -1
+					&&
+					readingNodes.indexOf(obj.target) !== -1);
+		}
+		else {
+			return (kanjiNodes.indexOf(obj.source.id) !== -1
+					&&
+					readingNodes.indexOf(obj.target.id) !== -1);					
+		}
+	});
+
+	return data;
+}

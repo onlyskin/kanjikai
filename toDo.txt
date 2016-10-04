@@ -1,15 +1,18 @@
 To Do:
+- add slider for distanceMax of the charge strength
+- refactor preprocessdata and filter functions out a bit
 
-visual:
-- make borders on lines
-
+- finish filter function for arbitrary kanji lists
+- fix weird bug with filtering on kun, and filtering back on both kun and on
+- implement a textfield to paste in kanji to use (allow automatic selection of grade kanji)
 - make a new filter function which can filter on arbitrary lists of kanji passed to it from the filter
+- implement drag and drop
 - change so that kanji have a greater collid radius to other kanji
-- add in-page functionality to toggle view of meaning of kanji
-- add in-page functionality to toggle from hiragana and katakana
-to romaji
 - allow focusing on a specific kanji/reading and seeing x degrees
-of separation
+of separation!!
 - fix zooming/panning
 - have added nodes appear at random positions in the screen, not all at 0, 0
 - fix the unfocusing on nodes behaviour when you click to pan
+
+eventually:
+- example words
