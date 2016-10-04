@@ -355,31 +355,36 @@ d3.json('static/data/large.json', function(response) {
 	function unfilter() {
 		simulation.stop()
 
-		var nodesCopy = data.nodes;
+		var currentNodes = data.nodes;
 		data.nodes = originalData.nodes;
-		var nodesCopyMap = nodesCopy.map(function(obj) { return obj.id; });
+		var currentNodeIds = {};
+		for (i in currentNodes) {
+			currentNodeIds[currentNodes[i].id] = currentNodes[i];
+		}
 
 		for (i in data.nodes) {
-			var tempIndex = nodesCopyMap.indexOf(data.nodes[i].id);
-			if (tempIndex !== -1) {
-				data.nodes[i] = nodesCopy[tempIndex];
+			var id = data.nodes[i].id;
+			if (currentNodeIds[id]) {
+				data.nodes[i] = currentNodeIds[id];
 			}
 		}
 
-		var linksCopy = data.links;
+		var currentLinks = data.links;
 		data.links = originalData.links;
-		var linksCopyMap = linksCopy.map(function(obj) { return obj.source.id + '-' + obj.target.id; });
+		var currentLinkIds = {};
+		for (i in currentLinks) {
+			var link = currentLinks[i];
+			currentLinkIds[link.source.id + '-' + link.target.id] = link;
+		}
 
 		for (i in data.links) {
-			var tempIndex = linksCopyMap.indexOf(data.links[i].source + '-' + data.links[i].target);
-			if (tempIndex !== -1) {
-				data.links[i] = linksCopy[tempIndex];
+			var link = data.links[i];
+			var id = link.source + '-' + link.target;
+			if (currentLinkIds[id]) {
+				link = currentLinkIds[id];
 			}
 		}
 
-//		data.links = originalData.links;
-
-		update();
 	}
 
 	//refilters the data according to the current parameters on the

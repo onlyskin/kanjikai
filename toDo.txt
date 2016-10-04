@@ -3,7 +3,6 @@ To Do:
 - refactor preprocessdata and filter functions out a bit
 
 - finish filter function for arbitrary kanji lists
-- fix weird bug with filtering on kun, and filtering back on both kun and on
 - implement a textfield to paste in kanji to use (allow automatic selection of grade kanji)
 - make a new filter function which can filter on arbitrary lists of kanji passed to it from the filter
 - implement drag and drop

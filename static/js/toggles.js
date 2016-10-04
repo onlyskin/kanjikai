@@ -5,7 +5,6 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		console.log(filters.kanji);
 		unfilter();
 		reapplyFilters();
-		update();
 	};
 
 	romajiToggle.onchange = function() {
@@ -28,8 +27,6 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		if (!this.checked) {
 			data = onFilter.process(data);
 			filters.on = true;
-			//currently not reversible
-			//this.disabled="disabled";
 		}
 		else {
 			filters.on = false;
@@ -44,8 +41,6 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		if (!this.checked) {
 			data = kunFilter.process(data);
 			filters.kun = true;
-			//currently not reversible
-			//this.disabled="disabled";
 		}
 		else {
 			filters.kun = false;
