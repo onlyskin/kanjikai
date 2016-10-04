@@ -29,7 +29,7 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 			data = onFilter.process(data);
 			filters.on = true;
 			//currently not reversible
-			this.disabled="disabled";
+			//this.disabled="disabled";
 		}
 		else {
 			filters.on = false;
@@ -45,7 +45,7 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 			data = kunFilter.process(data);
 			filters.kun = true;
 			//currently not reversible
-			this.disabled="disabled";
+			//this.disabled="disabled";
 		}
 		else {
 			filters.kun = false;

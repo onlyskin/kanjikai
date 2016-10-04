@@ -216,7 +216,7 @@ d3.json('static/data/large.json', function(response) {
 	}
 
 	function dragstarted(d) {
-	  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+	  if (!d3.event.active) simulation.alphaTarget(0.1).restart();
 	  d.fx = d.x;
 	  d.fy = d.y;
 	}
@@ -328,7 +328,7 @@ d3.json('static/data/large.json', function(response) {
 
 		//UPDATE SELECTION
 		var links = linkGroup
-			.selectAll('line')
+			.selectAll('g')
 			.data(data.links, function(d) { return d.source.id+'-'+d.target.id; });
 
 		//EXIT SELECTION
