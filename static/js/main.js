@@ -6,10 +6,11 @@ filters = {
 	kanji: ''
 };
 
+var kanjiInputHistory = [];
+var kanjiInput = document.getElementById('kanjiInput');
+
 var romajiToggle = document.getElementById('romajiToggle');
 var meaningsToggle = document.getElementById('meaningsToggle');
-
-var kanjiInput = document.getElementById('kanjiInput');
 
 var grade1 = '日一人年大十二本中出三見月生五上四金九入学円子八六下気小七山女百先名川千水男校土木車白天火右左休立手力目田正文口町空雨足早字音花赤青村夕石竹森林王犬玉草耳虫糸貝';
 var grade2 = '国長時行分後前間東今高外来話北午書半西電語聞食何南万毎母読友会同自社父地方新場明京通言理体作用強公野思家多心教元近考画海売知道計朝台広少工止切楽店親答夜帰古歌買図週室歩風紙黒春色走秋夏合市内回米当首数記点活原交組引直曜番算肉線声形鳥頭門冬昼茶谷光科弟細丸太戸牛魚兄園馬顔船羽岩角妹池星姉寺遠絵弱晴雪毛黄雲鳴才麦里矢刀弓汽';

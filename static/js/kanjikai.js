@@ -99,43 +99,31 @@ d3.json('static/data/large.json', function(response) {
 	function charFilter() {
 		this.process = function(data, includeKanji) {
 
+			var currentReadings = {};
+			var currentKanji = {};
+
 			//Removes any kanji not in the include list (nodes)
 			if (includeKanji !== '') {
-				var includeReadings = [];
 				for (i in includeKanji) {
 					var kanji = includeKanji[i];
-					includeReadings.push.apply(includeReadings, kToR[kanji]);
+					currentKanji[kanji] = true;
+					readings = kToR[kanji];
+					for (i in readings) {
+						currentReadings[readings[i]] = true;
+					}
 				}
 				data.nodes = data.nodes.filter(function(obj) {
-					return (includeKanji.indexOf(obj.id) !== -1
-							||
-							includeReadings.indexOf(obj.id) !== -1);
+					return (currentKanji[obj.id] || currentReadings[obj.id]);
 				});
 			}
 
-			//builds list of kanji and reading nodes for filtering links at end
-			kanjiNodes = data.nodes.filter(function(obj) {
-				return obj.type === 'kanji';
-			})
-			.map(function(obj) { return obj.id; });
-
-			readingNodes = data.nodes.filter(function(obj) {
-				return obj.type === 'kun' || obj.type === 'on';
-			})
-			.map(function(obj) { return obj.id; });
-
 			//removes any links whose source and target nodes are no
-			//longer present (must be run at end of function)
 			data.links = data.links.filter(function(obj) {
 				if (typeof obj.source === 'string') {
-					return (kanjiNodes.indexOf(obj.source) !== -1
-							&&
-							readingNodes.indexOf(obj.target) !== -1);
+					return (currentKanji[obj.source] &&	currentReadings[obj.target]);
 				}
 				else {
-					return (kanjiNodes.indexOf(obj.source.id) !== -1
-							&&
-							readingNodes.indexOf(obj.target.id) !== -1);					
+					return (currentKanji[obj.source.id] && currentReadings[obj.target.id]);
 				}
 			});
 			return data;
@@ -148,6 +136,7 @@ d3.json('static/data/large.json', function(response) {
 	var kanjiFilter = new charFilter();
 
 	filters.kanji = grade1;
+	kanjiInputHistory.push(filters.kanji);
 	kanjiInput.value = filters.kanji;
 	data = kanjiFilter.process(data, filters.kanji);
 

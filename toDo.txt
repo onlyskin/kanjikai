@@ -2,10 +2,7 @@ To Do:
 - add slider for distanceMax of the charge strength
 - refactor preprocessdata and filter functions out a bit
 
-- finish filter function for arbitrary kanji lists
-- implement a textfield to paste in kanji to use (allow automatic selection of grade kanji)
-- make a new filter function which can filter on arbitrary lists of kanji passed to it from the filter
-- implement drag and drop
+- implement seeing all kanji with certain radicals
 - change so that kanji have a greater collid radius to other kanji
 - allow focusing on a specific kanji/reading and seeing x degrees
 of separation!!
