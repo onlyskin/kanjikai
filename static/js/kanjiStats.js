@@ -1,10 +1,18 @@
 var height = 550;
 var width = document.getElementById('content').clientWidth;
+var currentIndex = 50;
 
 var svg = d3.select('#content')
 	.append('svg')
 	.attr('height', height)
 	.attr('width', width);
+
+function zoom () {
+	console.log('zoom');
+}
+
+var zoomer = d3.zoom()
+  .on("zoom", zoom);
 
 d3.json('static/data/large.json', function(response) {
 
@@ -20,7 +28,6 @@ d3.json('static/data/large.json', function(response) {
 		allKanji.push(i);
 	}
 
-	var currentIndex = 450;
 	var mainKanji = allKanji[currentIndex];
 	var mainKanjiGroup = svg.append('g');
 
@@ -63,6 +70,7 @@ d3.json('static/data/large.json', function(response) {
 			currentIndex = allKanji.indexOf(d);
 			update();
 		})
+		.call(zoomer).on('wheel.zoom', pan)
 			.merge(scrollingKanjiElements)
 		.transition()
 		.attr('x', function(d, i) {
@@ -89,6 +97,22 @@ d3.json('static/data/large.json', function(response) {
 
 	update();
 
+	function pan () {
+		var change = d3.event.wheelDeltaY;
+		var sign;
+		if (change > 0) {sign = 1;} else {sign = -1;}
+		console.log(change, sign);
+		while (change != 0) {
+			setTimeout(increment, 10);
+			change = change - sign;
+			d3.event.preventDefault();
+		}
+		function increment () {
+			currentIndex += sign;
+			update();
+		}
+		d3.event.preventDefault();
+	}
 
 	var leftArrow = svg.append('text')
 		.classed('scrollArrow', true)
