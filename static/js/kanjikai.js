@@ -5,22 +5,9 @@ d3.json('static/data/large.json', function(response) {
 	var originalData = JSON.parse(JSON.stringify(data));
 
 	//sets up kanji to reading and reading to kanji dictionaries from the data
-	var kToR = {};
-	var rToK = {};
-	for (i in data.nodes) {
-		var node = data.nodes[i];
-		if (node.type === 'kanji') {
-			kToR[node.id] = [];
-		}
-		if (node.type !== 'kanji') {
-			rToK[node.id] = [];
-		}
-	}
-	for (i in data.links) {
-		var link = data.links[i];
-		kToR[link.source].push(link.target);
-		rToK[link.target].push(link.source);
-	}
+	var KRDICTS = makeDicts(data);
+	var kToR = KRDICTS.kToR;
+	var rToK = KRDICTS.rToK;
 
 	//Creates a custom filter function for changing the nodes/links object
 	//excludeReading specifies either 'on' or 'kun' to be excluded

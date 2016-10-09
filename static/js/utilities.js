@@ -279,3 +279,31 @@ function preProcessData(data) {
 
 	return data;
 }
+
+//this function sets up the KanjiToReading and ReadingToKanji
+//dictionaries for optimised processing
+function makeDicts(data) {
+	var result = {};
+	var kToR = {};
+	var rToK = {};
+	var kToM = {};
+	for (i in data.nodes) {
+		var node = data.nodes[i];
+		if (node.type === 'kanji') {
+			kToR[node.id] = [];
+			kToM[node.id] = node.meaning;
+		}
+		if (node.type !== 'kanji') {
+			rToK[node.id] = [];
+		}
+	}
+	for (i in data.links) {
+		var link = data.links[i];
+		kToR[link.source].push(link.target);
+		rToK[link.target].push(link.source);
+	}
+	result['kToR'] = kToR;
+	result['rToK'] = rToK;
+	result['kToM'] = kToM;
+	return result;
+}

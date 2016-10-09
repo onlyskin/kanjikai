@@ -1,0 +1,29 @@
+div #content {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+text {
+	font-family: sans-serif;
+	text-anchor: middle;
+	alignment-baseline: middle;	
+}
+
+#mainKanji {
+	font-size: 120px;
+}
+
+#mainKanjiMeaning {
+	font-size: 40px;
+}
+
+#scrollingKanji {
+	font-size: 30px;
+}
+
+.scrollArrow {
+	font-size: 20px;
+}
