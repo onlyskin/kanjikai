@@ -1,18 +1,11 @@
 var height = 550;
 var width = document.getElementById('content').clientWidth;
-var currentIndex = 50;
+var currentIndex = 10;
 
 var svg = d3.select('#content')
 	.append('svg')
 	.attr('height', height)
 	.attr('width', width);
-
-function zoom () {
-	console.log('zoom');
-}
-
-var zoomer = d3.zoom()
-  .on("zoom", zoom);
 
 d3.json('static/data/large.json', function(response) {
 
@@ -22,11 +15,17 @@ d3.json('static/data/large.json', function(response) {
 	var kToR = KRDICTS.kToR;
 	var rToK = KRDICTS.rToK;
 	var kToM = KRDICTS.kToM;
+	console.log(kToR);
 
 	var allKanji = [];
 	for (i in kToR) {
 		allKanji.push(i);
 	}
+
+	var s = function(a, b) {
+		return orderedHeisigDict[a] - orderedHeisigDict[b];
+	};
+	allKanji.sort(s);
 
 	var mainKanji = allKanji[currentIndex];
 	var mainKanjiGroup = svg.append('g');
@@ -42,6 +41,7 @@ d3.json('static/data/large.json', function(response) {
 		.attr('id', 'mainKanjiMeaning');
 
 	kanjiPerSide = 9;
+	extraKanji = 5;
 	var scrollingKanji = [];
 	var scrollingKanjiY = height - 40;
 	var scrollSpacing = 30;
@@ -54,8 +54,10 @@ d3.json('static/data/large.json', function(response) {
 		mainKanjiText.text(mainKanji);
 		mainKanjiMeaning.text(kToM[mainKanji]);
 
+
+
 		scrollingKanji = [];
-		for (var i = currentIndex - kanjiPerSide; i <= currentIndex + kanjiPerSide; i++) {
+		for (var i = currentIndex - kanjiPerSide - extraKanji; i <= currentIndex + kanjiPerSide + extraKanji; i++) {
 			scrollingKanji.push(allKanji[i]);
 		}
 
@@ -70,49 +72,32 @@ d3.json('static/data/large.json', function(response) {
 			currentIndex = allKanji.indexOf(d);
 			update();
 		})
-		.call(zoomer).on('wheel.zoom', pan)
 			.merge(scrollingKanjiElements)
 		.transition()
 		.attr('x', function(d, i) {
-			position = i - kanjiPerSide;
+			position = i - kanjiPerSide - extraKanji;
 			return width / 2 + scrollSpacing * position;
 		})
 		.attr('opacity', function(d, i) {
-			position = Math.abs(i - kanjiPerSide);
+			position = Math.abs(i - kanjiPerSide - extraKanji);
 			opacityScale = d3.scaleLinear()
 				.domain([0, kanjiPerSide])
-				.range([0.4, 0]);
+				.range([0.4, 1e-6]);
 			return opacityScale(position);
 		})
 		.attr('font-weight', function(d, i) {
-			if ( i == kanjiPerSide ) {
+			if ( i == kanjiPerSide + extraKanji ) {
 				return 600;
 			}
 		})
 		.text(function(d) { return d; });
 
-		scrollingKanjiElements.exit().remove();
+		scrollingKanjiElements.exit()
+			.remove();
 
 	};
 
 	update();
-
-	function pan () {
-		var change = d3.event.wheelDeltaY;
-		var sign;
-		if (change > 0) {sign = 1;} else {sign = -1;}
-		console.log(change, sign);
-		while (change != 0) {
-			setTimeout(increment, 10);
-			change = change - sign;
-			d3.event.preventDefault();
-		}
-		function increment () {
-			currentIndex += sign;
-			update();
-		}
-		d3.event.preventDefault();
-	}
 
 	var leftArrow = svg.append('text')
 		.classed('scrollArrow', true)
@@ -136,7 +121,6 @@ d3.json('static/data/large.json', function(response) {
 			else {
 				currentIndex ++;
 			}
-			console.log(currentIndex);	
 			update();
 		});
 
