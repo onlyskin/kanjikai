@@ -1,6 +1,14 @@
 var romajiToggle = document.getElementById('romajiToggle');
 var meaningsToggle = document.getElementById('meaningsToggle');
 
+romajiToggle.onchange = function() {
+	d3.selectAll('.node text.on, text.kun')
+	  .text(function(d) {
+	  	if (romajiToggle.checked) { return kanaToRomaji(d.id); }
+	  	else { return d.id; }
+	  });
+};
+
 var height = 550;
 var width = document.getElementById('content').clientWidth;
 var currentIndex = 100;
@@ -33,19 +41,21 @@ d3.json('static/data/large.json', function(response) {
 	};
 	allKanji.sort(s);
 
-	var mainKanji = allKanji[currentIndex];
-	var mainKanjiGroup = svg.append('g');
+	function currentKanji() {
+		return allKanji[currentIndex];
+	}
 
 	var forceData = {nodes: [], links: []};
 
 	function updateForceDataLevel1() {
 		forceData.nodes = [];
 		forceData.links = [];
-		mainNode = idToNode[mainKanji];
+		var currentK = currentKanji()
+		mainNode = idToNode[currentK];
 		mainNode.fx = width / 2;
 		mainNode.fy = height / 2;
-		forceData.nodes.push(idToNode[mainKanji]);
-		forceData.links = forceData.links.concat(idToLinks[mainKanji]);
+		forceData.nodes.push(idToNode[currentK]);
+		forceData.links = forceData.links.concat(idToLinks[currentK]);
 		for (i in forceData.links) {
 			var target = forceData.links[i].target;
 			forceData.nodes.push(idToNode[target]);
@@ -57,16 +67,6 @@ d3.json('static/data/large.json', function(response) {
 	};
 
 	updateForceDataLevel1();
-
-	var mainKanjiText = mainKanjiGroup.append('text')
-		.attr('x', width / 2)
-		.attr('y', height / 2)
-		.attr('id', 'mainKanji');
-
-	var mainKanjiMeaning = mainKanjiGroup.append('text')
-		.attr('x', width / 2)
-		.attr('y', height / 2 + 60)
-		.attr('id', 'mainKanjiMeaning');
 
 	kanjiPerSide = 9;
 	extraKanji = 5;
@@ -85,8 +85,8 @@ d3.json('static/data/large.json', function(response) {
 
 	var simulation = d3.forceSimulation();
 	simulation.nodes();
-	simulation.force('charge', d3.forceManyBody().strength(-20));
-	simulation.force('collide', d3.forceCollide(30));
+	simulation.force('charge', d3.forceManyBody().strength(40));
+	simulation.force('collide', d3.forceCollide(60));
 	simulation.on('tick', ticked);
 
 	function ticked() {
@@ -111,12 +111,7 @@ d3.json('static/data/large.json', function(response) {
 			.nodes(forceData.nodes);
 
 		simulation.force('link', d3.forceLink(forceData.links)
-				.id(function(d) { return d.id; })
-				.distance(0)
-				.strength(function(link) {
-					return 1;
-				})
-				);
+				.id(function(d) { return d.id; }));
 
 		simulation.alpha(1).restart();
 
@@ -139,7 +134,7 @@ d3.json('static/data/large.json', function(response) {
 			  	.append('circle')
 			  .attr('cx', function(d,i) { return d.x })
 			  .attr('cy', function(d,i) { return d.y })
-			  .attr('r', function(d) { return circleRadius[d.type] })
+			  .attr('r', 0)
 			  .style('stroke', 'PowderBlue')
 			  .style('stroke-width', 3);
 
@@ -153,10 +148,10 @@ d3.json('static/data/large.json', function(response) {
 			  .attr('class', function(d) { return d.type; });
 
 		newMeaningElements = nodesEnterSelection.append('g')
-			  .attr('transform', 'translate(0,22)')
 				.append('text')
-			  .attr('x', function(d,i) { return d.x })
-			  .attr('y', function(d,i) { return d.y })
+			  .attr('x', width / 2)
+			  .attr('y', height / 2)
+			  .attr('transform', 'translate(0,60)')
 			  .text(function(d) { if (d.meaning && meaningsToggle.checked) { return d.meaning; } })
 			  .attr('class', function(d) { return 'meaning'; });
 
@@ -224,11 +219,7 @@ d3.json('static/data/large.json', function(response) {
 
 	updateForceLayout();
 
-	function update() {
-
-		mainKanji = allKanji[currentIndex];
-		mainKanjiText.text(mainKanji);
-		mainKanjiMeaning.text(kToM[mainKanji]);
+	function updateScrollBar() {
 
 		scrollingKanji = [];
 		for (var i = currentIndex - kanjiPerSide - extraKanji; i <= currentIndex + kanjiPerSide + extraKanji; i++) {
@@ -262,7 +253,7 @@ d3.json('static/data/large.json', function(response) {
 		.on('click', function(d, i) {
 			if (i > extraKanji && i < kanjiPerSide * 2 + 1) {
 				currentIndex = allKanji.indexOf(d);
-				update();
+				updateScrollBar();
 				updateForceDataLevel1();
 				updateForceLayout();
 			}
@@ -299,7 +290,7 @@ d3.json('static/data/large.json', function(response) {
 
 	};
 
-	update();
+	updateScrollBar();
 
 	var leftArrow = svg.append('text')
 		.classed('scrollArrow', true)
@@ -323,7 +314,7 @@ d3.json('static/data/large.json', function(response) {
 			else {
 				currentIndex ++;
 			}
-			update();
+			updateScrollBar();
 			updateForceDataLevel1();
 			updateForceLayout();
 		});

@@ -13,14 +13,6 @@ text {
 	-webkit-user-select: none;
 }
 
-#mainKanji {
-	font-size: 120px;
-}
-
-#mainKanjiMeaning {
-	font-size: 40px;
-}
-
 #scrollingKanji {
 	font-size: 30px;
 }
@@ -30,69 +22,30 @@ text {
 }
 
 .links line.linkInner {
-  stroke: #FCEABD;
+/*  stroke: white;
   stroke-width: 2;
-}
+*/}
 
 .links line.linkOuter {
-  stroke: Indigo;
+  stroke: Gainsboro;
   stroke-width: 4;
 }
 
 .nodes circle {
-  stroke: none;
-  stroke-width: 40px;
-  fill: DarkSlateblue;
-}
-
-.nodes text {
-	text-anchor: middle;
-	alignment-baseline: middle;
 }
 
 .kanji {
-	font-size: 30px;
-	fill: Ivory;
-	font-family: sans-serif;	
-	text-shadow:
-   -1px -1px 0 black,  
-    1px -1px 0 black,
-    -1px 1px 0 black,
-     1px 1px 0 black;
+	font-size: 100px;
 }
 
 .on {
-	font-size: 10px;
-	fill: FireBrick;
-	font-family: sans-serif;
-	font-weight: 600;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
+	font-size: 20px;
 }
 
 .kun {
-	font-size: 10px;
-	fill: ForestGreen;	
-	font-family: sans-serif;	
-	font-weight: 600;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
+	font-size: 20px;
 }
 
 .meaning {
-	font-size: 14px;
-	fill: black;	
-	font-family: sans-serif;
-	font-weight: 1200;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
+	font-size: 40px;
 }
