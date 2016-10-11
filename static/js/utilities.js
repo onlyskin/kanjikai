@@ -309,3 +309,25 @@ function makeDicts(data) {
 	result['kToM'] = kToM;
 	return result;
 }
+
+function makeForceDicts(data) {
+	var result = {};
+	var idToNode = {};
+	var idToLinks = {};
+	for (i in data.nodes) {
+		var node = data.nodes[i];
+		var kanji = node.id;
+		idToNode[kanji] = node;
+		idToLinks[kanji] = [];
+	}
+	for (i in data.links) {
+		var link = data.links[i];
+		var source = link.source;
+		var target = link.target;
+		idToLinks[source].push(link);
+		idToLinks[target].push(link);
+	}
+	result['idToNode'] = idToNode;
+	result['idToLinks'] = idToLinks;
+	return result;
+}
