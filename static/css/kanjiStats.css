@@ -28,7 +28,7 @@ text {
 
 .links line.linkOuter {
   stroke: Gainsboro;
-  stroke-width: 4;
+  stroke-width: 0;
 }
 
 .nodes circle {
