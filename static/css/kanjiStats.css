@@ -28,14 +28,14 @@ text {
 
 .links line.linkOuter {
   stroke: Gainsboro;
-  stroke-width: 0;
+  stroke-width: 4;
 }
 
 .nodes circle {
 }
 
 .kanji {
-	font-size: 100px;
+	font-size: 60px;
 }
 
 .on {
@@ -47,5 +47,11 @@ text {
 }
 
 .meaning {
-	font-size: 40px;
+	font-size: 15px;
+}
+
+#path {
+	fill: none;
+	stroke: black;
+	stroke-width: 2px;
 }

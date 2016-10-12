@@ -18,6 +18,14 @@ var svg = d3.select('#content')
 	.attr('height', height)
 	.attr('width', width);
 
+var path = svg.append('g')
+			  .append('path')
+			  .attr('id', 'path');
+
+//TESTING DRAWPATH
+drawPathTest();
+//TESTING DRAWPATH
+
 d3.json('static/data/large.json', function(response) {
 
 	var data = preProcessData(response);
@@ -103,6 +111,8 @@ d3.json('static/data/large.json', function(response) {
 	    nodeGroup.selectAll('text')
 	        .attr("x", function(d) { return d.x; })
 	        .attr("y", function(d) { return d.y; });
+
+    	drawPath(forceData);
 	}
 
 	function updateForceLayout() {
@@ -151,7 +161,7 @@ d3.json('static/data/large.json', function(response) {
 				.append('text')
 			  .attr('x', width / 2)
 			  .attr('y', height / 2)
-			  .attr('transform', 'translate(0,60)')
+			  .attr('transform', 'translate(0,28)')
 			  .text(function(d) { if (d.meaning && meaningsToggle.checked) { return d.meaning; } })
 			  .attr('class', function(d) { return 'meaning'; });
 

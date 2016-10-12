@@ -331,3 +331,7 @@ function makeForceDicts(data) {
 	result['idToLinks'] = idToLinks;
 	return result;
 }
+
+function degreesToRadians(degrees) {
+	return degrees * (Math.PI / 180);
+}
