@@ -2,21 +2,12 @@
 var height = 550;
 var width = document.getElementById('content').clientWidth;
 var circleRadius = 45;
-var angleBuffer = 1;
+var angleBuffer = 20;
 //to go back inside drawPath at some point
+var pathData = [];
 
 function drawPathTest() {
 	var svg = d3.select('svg');
-
-	svg.append('g')
-		.append('circle')
-		.attr('id', 'radiusTest')
-		.attr('cx', width / 2)
-		.attr('cy', height / 2)
-		.attr('stroke', 'black')
-		.attr('stroke-width', 2)
-		.attr('fill', 'none')
-		.attr('r', circleRadius);
 
 	svg.append('g')
 		.append('circle')
@@ -35,14 +26,19 @@ function drawPathTest() {
 		.attr('id', 'rightIntersectTest')
 		.attr('r', 5)
 		.attr('fill', 'blue');
+
+	svg.append('g')
+		.attr('transform', 'translate('+width/2+','+height/2+')')
+		.attr('id', 'testArcs');
+
 }
 
-function xyIntersect(lineGradient, polarity) {
-	var xIntersect = Math.sqrt(
-		(Math.pow(circleRadius, 2))/(1 + Math.pow(lineGradient, 2))
-		);
-	if (polarity < 0) {xIntersect *= -1}
-	var yIntersect = lineGradient * xIntersect;
+//returns correct xyIntersect object from any angle between
+//0 and 360. The intersect is the point at which the line
+//starting at 0,0 crosses the radius of the circle
+function xyIntersectFromAngle(angle) {
+	var xIntersect = circleRadius * Math.sin(degreesToRadians(angle));
+	var yIntersect = circleRadius * Math.cos(degreesToRadians(angle));
 	return {xIntersect: xIntersect, yIntersect: yIntersect};
 }
 
@@ -57,13 +53,8 @@ function getAngleFromNode(c, d) {
 
 function normaliseAngle(angle) {
 	if (angle < 0) { return angle + 360; }
-	else if (angle > 360) { return angle - 360; }
+	else if (angle > 359) { return angle - 360; }
 	else { return angle; }
-}
-
-function polarityFromAngle(angle) {
-	if (angle <= 180) { return -1; }
-	else { return 1; }
 }
 
 function drawPath(forceData) {
@@ -80,66 +71,67 @@ function drawPath(forceData) {
 		}
 	}
 
+	var pathData = [];
+
 	for (i in nodePositions) {
-		if (i == 0) {
 		obj = nodePositions[i];
 		var c = obj.x - width / 2;
 		var d = height / 2 - obj.y;
 		var angle = getAngleFromNode(c, d);
-		var angleLeft = normaliseAngle(angle - 20);
-		var angleRight = normaliseAngle(angle + 20);
-		var gradientLeft = Math.tan(degreesToRadians(angleLeft));
-		var gradientRight = Math.tan(degreesToRadians(angleRight));
-		var xyLeft = xyIntersect(gradientLeft, polarityFromAngle(angleLeft));
-		var xyRight = xyIntersect(gradientRight, polarityFromAngle(angleRight));
+		var angleLeft = normaliseAngle(angle - angleBuffer);
+		var angleRight = normaliseAngle(angle + angleBuffer);
+		var xy = xyIntersectFromAngle(angle);
+		var xyLeft = xyIntersectFromAngle(angleLeft);
+		var xyRight = xyIntersectFromAngle(angleRight);
+		var xIntersect = xy.xIntersect;
+		var yIntersect = xy.yIntersect;
 		var xIntersectLeft = xyLeft.xIntersect;
 		var yIntersectLeft = xyLeft.yIntersect;
 		var xIntersectRight = xyRight.xIntersect;
 		var yIntersectRight = xyRight.yIntersect;
-		var lineGradient = ((0 - d)
-							/
-							(0 - c));
-		polarity = c
-		xy = xyIntersect(lineGradient, polarity);
-		xIntersect = xy.xIntersect;
-		yIntersect = xy.yIntersect;
-		console.log(
-			'width/2', Math.round(width / 2),
-			'height/2', Math.round(height / 2),
-			'c', Math.round(c),
-			'd', Math.round(d),
-			'angleLeft', angleLeft,
-			'angle', angle,
-			'angleRight', angleRight,
-			'gradientLeft', gradientLeft,
-			'gradient', lineGradient,
-			'gradientRight', gradientRight,
-			'xIntersectLeft', xIntersectLeft,
-			'yIntersectLeft', yIntersectLeft,
-			'xIntersect', xIntersect,
-			'yIntersect', yIntersect,
-			'xIntersectRight', xIntersectRight,
-			'yIntersectRight', yIntersectRight
-			);
+		pathData.push({l: xyLeft, r: xyRight})
+		}
 
-		function runTests() {
-			d3.select('#IntersectTest')
-				.attr('cx', width/2 + xIntersect)
-				.attr('cy', height/2 + -yIntersect);
-			d3.select('#leftIntersectTest')
-				.attr('cx', width/2 + xIntersectLeft)
-				.attr('cy', height/2 + -yIntersectLeft);
-			d3.select('#rightIntersectTest')
-				.attr('cx', width/2 + xIntersectRight)
-				.attr('cy', height/2 + -yIntersectRight);
-		}
-		runTests();
-		}
-//		obj.radiusIntersectX = 50;
-//		obj.radiusIntersectY = 100;
+	function runTests() {
+		d3.select('#IntersectTest')
+			.attr('cx', width/2 + xIntersect)
+			.attr('cy', height/2 + -yIntersect);
+		d3.select('#leftIntersectTest')
+			.attr('cx', width/2 + xIntersectLeft)
+			.attr('cy', height/2 + -yIntersectLeft);
+		d3.select('#rightIntersectTest')
+			.attr('cx', width/2 + xIntersectRight)
+			.attr('cy', height/2 + -yIntersectRight);
+		
+		var paths = d3.select('#testArcs')
+			.selectAll('path')
+			.data(pathData);
+			
+			paths.enter()
+			.append('path')
+			.attr('fill', 'none')
+			.attr('stroke', 'black')
+			.merge(paths)
+			.attr('d', function(d) {
+				var startX = d.l.xIntersect;
+				var startY = d.l.yIntersect;
+				var endX = d.r.xIntersect;
+				var endY = d.r.yIntersect;
+				var space = angleBuffer * 2;
+				var arcPath = ('M ' + startX + ',' + -startY +
+						' A ' + space + ',' + space +
+						' 0 0 1 ' + endX + ',' + -endY);
+				console.log(arcPath);
+				return arcPath;
+			});
+
+			paths.exit().remove();
 	}
+
+		runTests();
+
+}
 
 //	var path = ('M472 235 A 40 40 0 1 0492 235');
 //	var pathElement = d3.select('#path');
 //	pathElement.attr('d', path);
-}
