@@ -27,8 +27,9 @@ text {
 */}
 
 .links line.linkOuter {
-  stroke: Gainsboro;
+  stroke: black;
   stroke-width: 4;
+  opacity: 0.2
 }
 
 .nodes circle {
@@ -54,4 +55,11 @@ text {
 	fill: none;
 	stroke: black;
 	stroke-width: 2px;
+}
+
+#mainPath {
+	stroke: red;
+	stroke-width: 2px;
+	fill: none;
+	stroke-dasharray: 2, 2;
 }
