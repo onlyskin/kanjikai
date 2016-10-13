@@ -1,11 +1,10 @@
 //to go back inside drawPath at some point
 var height = 550;
 var width = document.getElementById('content').clientWidth;
-var circleRadius = 60;
+var circleRadius = 50;
 var angleBuffer = 20;
 //to go back inside drawPath at some point
-var pathData = [];
-var mainPath = '';
+var pathString = '';
 
 function drawPathTest() {
 	var svg = d3.select('svg');
@@ -22,35 +21,6 @@ function drawPathTest() {
 		.attr('r', 3)
 		.attr('fill', 'blue');
 
-	svg.append('g')
-		.attr('transform', 'translate('+width/2+','+height/2+')')
-		.append('path')
-		.attr('id', 'mainPath');
-
-}
-
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-
-  return {
-    x: centerX + (radius * Math.cos(angleInRadians)),
-    y: centerY + (radius * Math.sin(angleInRadians))
-  };
-}
-
-function describeArc(x, y, radius, startAngle, endAngle){
-
-    var start = polarToCartesian(x, y, radius, endAngle);
-    var end = polarToCartesian(x, y, radius, startAngle);
-
-    var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-    var d = [
-        "M", start.x, start.y, 
-        "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-    ].join(" ");
-
-    return d;       
 }
 
 //returns correct xyIntersect object from any angle between
@@ -78,46 +48,94 @@ function normaliseAngle(angle) {
 }
 
 function drawPath(forceData) {
-	mainPath = '';
+	pathString = '';
 
-	var centralNodePosition = {x: width / 2, y: height / 2};
-	var nodePositions = [];
-	for (i in forceData.nodes) {
-		node = forceData.nodes[i];
-		if (node.fx === undefined) {
-			var x = node.x;
-			var y = node.y;
-			var position = {x: x, y: y};
-			nodePositions.push(position);
+	function getNodeCoordinates() {
+		var nodeCoordinates = [];
+		for (i in forceData.nodes) {
+			node = forceData.nodes[i];
+			if (node.fx === undefined) {
+				var x = node.x;
+				var y = node.y;
+				var position = {x: x, y: y};
+				nodeCoordinates.push(position);
+			}
+		}
+		return nodeCoordinates;
+	}
+
+	//returns array of objs with l/r values for start
+	//and end points of each arc
+	function getArcAngles(nodeCoordinates) {
+		var arcAngles = [];
+
+		for (i in nodeCoordinates) {
+			obj = nodeCoordinates[i];
+			var c = obj.x - width / 2;
+			var d = height / 2 - obj.y;
+			var angle = getAngleFromNode(c, d);
+			var angleLeft = normaliseAngle(angle - angleBuffer);
+			var angleRight = normaliseAngle(angle + angleBuffer);
+			var xy = xyIntersectFromAngle(angle);
+			var xyLeft = xyIntersectFromAngle(angleLeft);
+			var xyRight = xyIntersectFromAngle(angleRight);
+			arcAngles.push({l: angleLeft, r: angleRight})
+		}
+
+		arcAngles.sort(function(a, b) {
+			return a.l - b.l;
+		});
+
+		var tempArray = []
+		for (i in arcAngles) {
+			tempArray.push(arcAngles[i].l);
+			tempArray.push(arcAngles[i].r);
+		}
+		tempArray.push(tempArray.shift());
+		arcAngles = [];
+		for (i= 0; i < tempArray.length; i += 2) {
+			var obj = {l: tempArray[i], r: tempArray[i+1]}
+			arcAngles.push(obj);
+		}
+
+		return arcAngles;
+	}
+
+	var nodeCoordinates = getNodeCoordinates();
+	var arcAngles = getArcAngles(nodeCoordinates);
+	var arcStrings = arcAngles.map(function(obj) {
+		if (nodeCoordinates.length == 1) {
+			return describeArc(0, 0, circleRadius, obj.l, obj.r, true)
+		}
+		else {
+			return describeArc(0, 0, circleRadius, obj.l, obj.r)			
+		};
+	});	
+
+
+	function buildPathString() {
+		for (i = 0; i < arcStrings.length; i++) {
+			pathString += arcStrings[i];
+			var angleStart = (i == 0) ? arcAngles[arcAngles.length - 1].r : arcAngles[i-1].r;
+			var angleEnd = arcAngles[i].l;
+			var angleMid = (angleStart + angleEnd) / 2;
+			if ( angleEnd < 90 && angleStart > 270 ) {
+				var tempDiff = ((360 - angleStart) + angleEnd) / 2
+				if ( 360 - angleStart > angleEnd) {
+					angleMid = angleStart + tempDiff;
+				} else {
+					angleMid = angleEnd - tempDiff;
+				}
+			}
+			var lineStart = polarToCartesian(0, 0, circleRadius, angleStart);
+			var lineEnd = polarToCartesian(0, 0, circleRadius, angleEnd);
+			var lineMid = polarToCartesian(0, 0, circleRadius+20, angleMid);
+			pathString += ' L ' + lineMid.x + ' ' + lineMid.y + ' ';
+			pathString += ' L ' + lineStart.x + ' ' + lineStart.y + ' ';
 		}
 	}
 
-	var pathData = [];
-
-	for (i in nodePositions) {
-		obj = nodePositions[i];
-		var c = obj.x - width / 2;
-		var d = height / 2 - obj.y;
-		var angle = getAngleFromNode(c, d);
-		var angleLeft = normaliseAngle(angle - angleBuffer);
-		var angleRight = normaliseAngle(angle + angleBuffer);
-		var xy = xyIntersectFromAngle(angle);
-		var xyLeft = xyIntersectFromAngle(angleLeft);
-		var xyRight = xyIntersectFromAngle(angleRight);
-		var xIntersect = xy.xIntersect;
-		var yIntersect = xy.yIntersect;
-		var xIntersectLeft = xyLeft.xIntersect;
-		var yIntersectLeft = xyLeft.yIntersect;
-		var xIntersectRight = xyRight.xIntersect;
-		var yIntersectRight = xyRight.yIntersect;
-		pathData.push({l: angleLeft, r: angleRight})
-		}
-
-	for (i in pathData) {
-		var datum = pathData[i];
-		var arcPath = describeArc(0, 0, circleRadius, datum.l, datum.r);
-		mainPath += arcPath;
-	}
+	buildPathString();
 
 	function runTests() {
 		d3.select('#IntersectTest')
@@ -132,8 +150,13 @@ function drawPath(forceData) {
 		
 	}
 
-	runTests();
-	d3.select('#mainPath').attr('d', mainPath);
+//	runTests();
+	svg.append('g')
+		.attr('transform', 'translate('+width/2+','+height/2+')')
+		.append('path')
+		.attr('id', 'mainPath');
+
+	d3.select('#mainPath').attr('d', pathString);
 
 }
 

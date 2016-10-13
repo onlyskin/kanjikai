@@ -11,7 +11,7 @@ romajiToggle.onchange = function() {
 
 var height = 550;
 var width = document.getElementById('content').clientWidth;
-var currentIndex = 100;
+var currentIndex = 600;
 
 var svg = d3.select('#content')
 	.append('svg')
@@ -23,7 +23,7 @@ var path = svg.append('g')
 			  .attr('id', 'path');
 
 //TESTING DRAWPATH
-drawPathTest();
+//drawPathTest();
 //TESTING DRAWPATH
 
 d3.json('static/data/large.json', function(response) {
