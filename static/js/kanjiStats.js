@@ -11,7 +11,7 @@ romajiToggle.onchange = function() {
 
 var height = 550;
 var width = document.getElementById('content').clientWidth;
-var currentIndex = 600;
+var currentIndex = 1540;
 
 var svg = d3.select('#content')
 	.append('svg')

@@ -2,7 +2,7 @@
 var height = 550;
 var width = document.getElementById('content').clientWidth;
 var circleRadius = 50;
-var angleBuffer = 20;
+var angleBuffer = 30;
 //to go back inside drawPath at some point
 var pathString = '';
 
@@ -128,10 +128,21 @@ function drawPath(forceData) {
 				}
 			}
 			var lineStart = polarToCartesian(0, 0, circleRadius, angleStart);
+			var lineStartHigh = polarToCartesian(0, 0, circleRadius+60, angleStart);
 			var lineEnd = polarToCartesian(0, 0, circleRadius, angleEnd);
+			var lineEndHigh = polarToCartesian(0, 0, circleRadius+60, angleEnd);
 			var lineMid = polarToCartesian(0, 0, circleRadius+20, angleMid);
-			pathString += ' L ' + lineMid.x + ' ' + lineMid.y + ' ';
-			pathString += ' L ' + lineStart.x + ' ' + lineStart.y + ' ';
+			var lineMid1 = polarToCartesian(0, 0, circleRadius, angleMid);
+			var lineMid2 = polarToCartesian(0, 0, circleRadius+40, angleMid);
+			pathString += ('C ' + lineMid1.x + ' ' + lineMid1.y
+							+ ', ' + lineMid2.x + ' ' + lineMid2.y
+							+ ', ' + lineEndHigh.x + ' ' + lineEndHigh.y
+						);
+			pathString += ' L ' + lineStartHigh.x + ' ' + lineStartHigh.y + ' ';
+			pathString += ('C ' + lineMid2.x + ' ' + lineMid2.y
+							+ ', ' + lineMid1.x + ' ' + lineMid1.y
+							+ ', ' + lineStart.x + ' ' + lineStart.y
+						);
 		}
 	}
 
