@@ -1,104 +1,78 @@
-div #content {
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;
-	border: 1px solid black;
-	border-radius: 10px;
-}
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center; }
 
-div #title {
-	font-family: sans-serif;
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;	
-}
+header, #kanjiSetSelect, #kanjiInputContainer, #controls, #content {
+  border: 1px dotted red; }
 
-div #controls {
-	width: 80%;
-	margin: 0 auto;
-}
+#content {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px; }
 
-div .kanjiInput, .kanjiSetSelect {
-	width: 80%;
-	margin: 0 auto;
-	height: 20px;
-}
+header {
+  display: flex;
+  text-align: center;
+  min-height: 100px;
+  justify-content: center;
+  align-items: center; }
+  header #title {
+    font-family: sans-serif;
+    font-size: 40px; }
 
-#kanjiInput {
-	width: 100%;
-}
+#kanjiInputContainer, #kanjiSetSelect {
+  height: 20px; }
 
-#kanjiSetSelect {
-}
-
-div .control-float {
-	float: left;
-}
+.control-float {
+  float: left; }
 
 .links line.linkInner {
   stroke: #FCEABD;
-  stroke-width: 2;
-}
+  stroke-width: 2; }
 
 .links line.linkOuter {
   stroke: Indigo;
-  stroke-width: 4;
-}
+  stroke-width: 4; }
 
 .nodes circle {
   stroke: none;
   stroke-width: 40px;
-  fill: DarkSlateblue;
-}
+  fill: DarkSlateblue; }
 
 .nodes text {
-	text-anchor: middle;
-	alignment-baseline: middle;
-}
+  text-anchor: middle;
+  alignment-baseline: middle; }
+
+node:focus {
+  outline: none; }
 
 .kanji {
-	font-size: 30px;
-	fill: Ivory;
-	font-family: sans-serif;	
-	text-shadow:
-   -1px -1px 0 black,  
-    1px -1px 0 black,
-    -1px 1px 0 black,
-     1px 1px 0 black;
-}
+  font-size: 30px;
+  fill: Ivory;
+  font-family: sans-serif;
+  text-shadow: -1px -1px 0 black,   1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; }
 
 .on {
-	font-size: 10px;
-	fill: FireBrick;
-	font-family: sans-serif;
-	font-weight: 600;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
-}
+  font-size: 10px;
+  fill: FireBrick;
+  font-family: sans-serif;
+  font-weight: 600;
+  text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 
 .kun {
-	font-size: 10px;
-	fill: ForestGreen;	
-	font-family: sans-serif;	
-	font-weight: 600;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
-}
+  font-size: 10px;
+  fill: ForestGreen;
+  font-family: sans-serif;
+  font-weight: 600;
+  text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 
 .meaning {
-	font-size: 14px;
-	fill: black;	
-	font-family: sans-serif;
-	font-weight: 1200;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
-}
+  font-size: 14px;
+  fill: black;
+  font-family: sans-serif;
+  font-weight: 1200;
+  text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
+
+/*# sourceMappingURL=main.css.map */

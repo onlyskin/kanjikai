@@ -129,22 +129,25 @@ d3.json('static/data/large.json', function(response) {
 
 	var svg = d3.select('#content').append('svg');
 
-	var width = 1000;
+	var width = window.innerWidth * 0.8;
 	var height = window.innerHeight * 0.8;
 
 	svg.attr('height', height)
 	   .attr('width', '100%');
 
-	svg.append("rect")
-	    .attr("width", '100%')
+	var zoom = d3.zoom()
+	        .scaleExtent([1 / 20, 10])
+	        .on("zoom", zoomed);
+
+	var zoomOverlay = svg.append("rect");
+
+	zoomOverlay.attr("width", '100%')
 	    .attr("height", height)
 	//    .attr('stroke', 1)
 	//    .attr('stroke', 'black')
 	    .style("fill", "none")
 	    .style("pointer-events", "all")
-	    .call(d3.zoom()
-	        .scaleExtent([1 / 20, 10])
-	        .on("zoom", zoomed));
+	    .call(zoom);
 
 	function zoomed() {
 	  g.attr("transform", d3.event.transform);
@@ -158,6 +161,8 @@ d3.json('static/data/large.json', function(response) {
 	var g = svg.append('g')
 		.attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
 
+	zoom.translateBy(zoomOverlay, width/2, height/2);
+
 	var linkGroup = g.append('g')
 		  .attr('class', 'links');
 
@@ -168,7 +173,7 @@ d3.json('static/data/large.json', function(response) {
 
 	simulation.nodes();
 	simulation.force('center', d3.forceCenter(0, 0));
-	simulation.force('charge', d3.forceManyBody().strength(-20)
+	simulation.force('charge', d3.forceManyBody().strength(-100)
 		//uncommenting the line below 
 		//.distanceMax(-50)
 		);
@@ -215,7 +220,7 @@ d3.json('static/data/large.json', function(response) {
 
 		simulation.force('link', d3.forceLink(data.links)
 				.id(function(d) { return d.id; })
-				.distance(0)
+				.distance(160)
 				.strength(function(link) {
 					return 1;
 				})

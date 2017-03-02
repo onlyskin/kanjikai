@@ -14,10 +14,10 @@
 
   <body>
   	<div id="wrapper">
-  		<div id="title">
-  			<h1>Kanji-Kai</h1>
-  		</div>
-  		<div class="kanjiSetSelect">
+  		<header>
+  			<div id="title">Kanji-Kai</div>
+  		</header>
+  		<div id="kanjiSetSelect">
   			<button id="grade1">Grade 1</button>
   			<button id="grade2">Grade 2</button>
   			<button id="grade3">Grade 3</button>
@@ -27,7 +27,7 @@
   			<button id="grade7">Grade 7</button>
   			<button id="tree">木</button>
   		</div>
-  		<div class="kanjiInput">
+  		<div id="kanjiInputContainer">
   			<input type="text" id="kanjiInput"></input>
   		</div>
   		<div id="controls">
@@ -41,13 +41,13 @@
 		  	</div>
   			<div class="control-float">
 	  			<div>
-		  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-20"><label for="manyBodyStrenghtInput">Charge Strength</label>
+		  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
 		  		</div>
 	  			<div>
 		  			<input type="range" id="collideRadius" min="0" max="100" step="5" value="50"><label for="collideRadius">Collide Radius</label>
 		  		</div>
 	  			<div>
-		  			<input type="range" id="linkDistance" min="0" max="200" step="5" value="40"><label for="linkDistance">Link Distance</label>
+		  			<input type="range" id="linkDistance" min="0" max="200" step="5" value="160"><label for="linkDistance">Link Distance</label>
 		  		</div>
 		  	</div>
   			<div class="control-float">

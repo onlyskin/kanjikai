@@ -127,20 +127,20 @@ function drawPath(forceData) {
 					angleMid = angleEnd - tempDiff;
 				}
 			}
+			var highRadius = 60;
 			var lineStart = polarToCartesian(0, 0, circleRadius, angleStart);
-			var lineStartHigh = polarToCartesian(0, 0, circleRadius+60, angleStart);
 			var lineEnd = polarToCartesian(0, 0, circleRadius, angleEnd);
-			var lineEndHigh = polarToCartesian(0, 0, circleRadius+60, angleEnd);
-			var lineMid = polarToCartesian(0, 0, circleRadius+20, angleMid);
-			var lineMid1 = polarToCartesian(0, 0, circleRadius, angleMid);
-			var lineMid2 = polarToCartesian(0, 0, circleRadius+40, angleMid);
-			pathString += ('C ' + lineMid1.x + ' ' + lineMid1.y
-							+ ', ' + lineMid2.x + ' ' + lineMid2.y
-							+ ', ' + lineEndHigh.x + ' ' + lineEndHigh.y
+			var highPoint = polarToCartesian(0, 0, circleRadius+highRadius, angleMid);
+//			var bezierEnd2 = polarToCartesian(0, 0, highRadius, Math.atan((highRadius * Math.tan(degreesToRadians(angleBuffer))) / circleRadius))
+			var bezierControl1 = polarToCartesian(0, 0, circleRadius+5, angleMid);
+			var bezierControl2 = polarToCartesian(0, 0, circleRadius+65, angleMid);
+			pathString += (' C ' + bezierControl1.x + ' ' + bezierControl1.y
+							+ ', ' + bezierControl2.x + ' ' + bezierControl2.y
+							+ ', ' + highPoint.x + ' ' + highPoint.y
 						);
-			pathString += ' L ' + lineStartHigh.x + ' ' + lineStartHigh.y + ' ';
-			pathString += ('C ' + lineMid2.x + ' ' + lineMid2.y
-							+ ', ' + lineMid1.x + ' ' + lineMid1.y
+			pathString += ' M ' + highPoint.x + ' ' + highPoint.y + ' ';
+			pathString += (' C ' + bezierControl2.x + ' ' + bezierControl2.y
+							+ ', ' + bezierControl1.x + ' ' + bezierControl1.y
 							+ ', ' + lineStart.x + ' ' + lineStart.y
 						);
 		}

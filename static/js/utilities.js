@@ -351,6 +351,10 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
   };
 }
 
+function angleToGradient(angle) {
+	return ;
+}
+
 function describeArc(x, y, radius, startAngle, endAngle, largeArcOverride=false){
 
     var start = polarToCartesian(x, y, radius, endAngle);
@@ -366,4 +370,19 @@ function describeArc(x, y, radius, startAngle, endAngle, largeArcOverride=false)
     ].join(" ");
 
     return d;       
+}
+
+function rotate(x, y, angle) {
+    var radians = (Math.PI / 180) * angle,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians),
+        cx = 0,
+        cy = 0,
+        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+        ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    return {x: nx, y: ny};
+}
+
+function translate(x, y, x1, y1) {
+	return {x: x+x1, y: y+y1};
 }

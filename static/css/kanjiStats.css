@@ -29,7 +29,7 @@ text {
 .links line.linkOuter {
   stroke: black;
   stroke-width: 4;
-  opacity: 0.2
+  opacity: 0;
 }
 
 .nodes circle {
@@ -61,5 +61,4 @@ text {
 	stroke: red;
 	stroke-width: 2px;
 	fill: none;
-	stroke-dasharray: 2, 2;
 }
