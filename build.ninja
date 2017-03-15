@@ -1,0 +1,16 @@
+src_dir = .
+build_dir = out
+
+rule cp
+  command = cp $in $out
+
+rule sass
+  command = sass $in $out
+
+rule jinja
+  command = python jinja.py $in $out
+
+build $build_dir/favicon.ico: cp favicon.ico
+build $build_dir/static/css/type/Vollkorn-Regular.ttf: cp static/css/type/Vollkorn-Regular.ttf
+build $build_dir/static/css/main.css: sass static/css/main.scss | static/css/_reset.scss
+build $build_dir/index.html: jinja html_files/templates/index.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html
