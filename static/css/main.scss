@@ -7,6 +7,11 @@
 	src: url("type/Vollkorn-Regular.ttf");
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
 html {
 	height: 100%;
 }
@@ -43,6 +48,42 @@ h1 {
 	margin: 30px;
 }
 
+.blue {
+	background: linear-gradient(155deg, #5faccb 0%,#4798c1 50%,#006aa8 51%,#3799db 100%);
+}
+
+.green {
+	background: linear-gradient(155deg, #5fcb6f 0%,#47c15f 50%,#00a827 51%,#37db63 100%);
+}
+
+.red {
+	background: linear-gradient(155deg, #cb5f61 0%,#c14b47 50%,#a80b00 51%,#db4737 100%);
+}
+
+.pink {
+	background: linear-gradient(155deg, #cb5fa3 0%,#c1478e 50%,#a8005c 51%,#db378c 100%);
+}
+
+.purple {
+	background: linear-gradient(155deg, #8e5fcb 0%,#8247c1 50%,#5700a8 51%,#9137db 100%);
+}
+
+.turquoise {
+	background: linear-gradient(155deg, #5fcbb0 0%,#47c1a9 50%,#00a88c 51%,#37dbc5 100%);
+}
+
+.yellow {
+	background: linear-gradient(155deg, #cbb35f 0%,#c1ad47 50%,#a89200 51%,#dbcb37 100%);
+}
+
+.orange {
+	background: linear-gradient(155deg, #cb905f 0%,#c18447 50%,#a85a00 51%,#db9437 100%);
+}
+
+.gray {
+	background: linear-gradient(155deg, #959595 0%,#848484 50%,#545454 51%,#898989 100%);
+}
+
 #linkContainerWrapper {
 	display: flex;
 	justify-content: space-around;
@@ -60,15 +101,9 @@ h1 {
 		padding: 20px;
 		border-radius: 50px;
 		font-size: 1.6em;
-		background: linear-gradient(155deg, #5fb0cb 0%,#479dc1 50%,#0070a8 51%,#379fdb 100%);
 
 		display: flex;
 		justify-content: center;
-
-		a {
-			color: black;
-			text-decoration: none;
-		}
 	}
 }
 
@@ -79,32 +114,29 @@ h1 {
 	justify-content: center;
 }
 
-header, #kanjiSetSelect, #kanjiInputContainer, #controls, #content {
-	border: 1px dotted red;
-}
-
 #content {
 	text-align: center;
 	border: 1px solid black;
 	border-radius: 10px;
 }
 
-header {
-	display: flex;
-	text-align: center;
-	min-height: 100px;
-	justify-content: center;
-	align-items: center;
-
-	#title {
-		font-family: sans-serif;
-		font-size: 40px;
-	}
-
+#kanjiInputContainer {
+	height: 20px;
 }
 
-#kanjiInputContainer, #kanjiSetSelect {
-	height: 20px;
+#kanjiGradeSelect {
+	display: flex;
+	justify-content: space-around;
+	.gradeButton {
+		margin: 5px;
+		border: 1px solid black;
+		padding: 7px;
+		border-radius: 30px;
+		font-size: 1em;
+
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .control-float {

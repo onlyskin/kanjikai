@@ -11,6 +11,17 @@ rule jinja
   command = python jinja.py $in $out
 
 build $build_dir/favicon.ico: cp favicon.ico
+
+build $build_dir/static/js/d3.min.js: cp static/js/d3.min.js
+build $build_dir/static/js/main.js: cp static/js/main.js
+build $build_dir/static/js/utilities.js: cp static/js/utilities.js
+build $build_dir/static/js/kanjikai.js: cp static/js/kanjikai.js
+build $build_dir/static/js/toggles.js: cp static/js/toggles.js
+build $build_dir/static/data/large.json: cp static/data/large.json
+
 build $build_dir/static/css/type/Vollkorn-Regular.ttf: cp static/css/type/Vollkorn-Regular.ttf
 build $build_dir/static/css/main.css: sass static/css/main.scss | static/css/_reset.scss
+
 build $build_dir/index.html: jinja html_files/templates/index.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html
+build $build_dir/grade_1.html: jinja html_files/templates/grade_1.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
+build $build_dir/sandbox.html: jinja html_files/templates/sandbox.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
