@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="static/css/main.css">
-		<link rel='shortcut icon' type='image/ico' href='favicon.ico' />
-	</head>
-	<body>
-		<div id="header">
-	<h1><a href="index.html">Kanjikai</a></h1>
-</div>
-		<div id="pagecontent">
-			
+{% extends 'base.html' %}
+{% block content %}
 <div id="wrapper">
 	<div id="kanjiInputContainer">
 		<input type="text" id="kanjiInput"></input>
@@ -36,14 +25,5 @@
 <script src="static/js/utilities.js"></script>
 <script src="static/js/kanjikai.js"></script>
 <script src="static/js/toggles.js"></script>
-
-<script>
-//	kanjiInput.value = grade5;
-//	kanjiInput.oninput();
-</script>
-
-
-		</div>
-		<div id="footer"></div>
-	</body>
-</html>
+{% block script %}{% endblock %}
+{% endblock %}

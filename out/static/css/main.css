@@ -45,6 +45,91 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 5.5px 0; }
+
+input[type=range]:focus {
+  outline: none; }
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 0.1px solid #010101; }
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 17px;
+  width: 3px;
+  border-radius: 5px;
+  background: #000000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5.6px; }
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffffff; }
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 0.1px solid #010101; }
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 17px;
+  width: 3px;
+  border-radius: 5px;
+  background: #000000;
+  cursor: pointer; }
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent; }
+
+input[type=range]::-ms-fill-lower {
+  background: #ebebeb;
+  border: 0.1px solid #010101;
+  border-radius: 20px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; }
+
+input[type=range]::-ms-fill-upper {
+  background: #ffffff;
+  border: 0.1px solid #010101;
+  border-radius: 20px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; }
+
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 17px;
+  width: 3px;
+  border-radius: 5px;
+  background: #000000;
+  cursor: pointer;
+  height: 6px; }
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #ffffff; }
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffffff; }
+
 @font-face {
   font-family: 'Vollkorn';
   font-style: normal;
@@ -140,8 +225,10 @@ h1 {
   border: 1px solid black;
   border-radius: 10px; }
 
-#kanjiInputContainer {
-  height: 20px; }
+#kanjiInputContainer #kanjiInput {
+  font-size: 1em;
+  width: 100%;
+  margin: 2px; }
 
 #kanjiGradeSelect {
   display: flex;
@@ -158,47 +245,39 @@ h1 {
 .control-float {
   float: left; }
 
-.links line.linkInner {
+#content .links line.linkInner {
   stroke: #FCEABD;
   stroke-width: 2; }
-
-.links line.linkOuter {
+#content .links line.linkOuter {
   stroke: Indigo;
   stroke-width: 4; }
-
-.nodes circle {
+#content .nodes circle {
   stroke: none;
   stroke-width: 40px;
   fill: DarkSlateblue; }
-
-.nodes text {
+#content .nodes text {
   text-anchor: middle;
   alignment-baseline: middle; }
-
-node:focus {
+#content node:focus {
   outline: none; }
-
-.kanji {
+#content .kanji {
   font-size: 30px;
   fill: Ivory;
   font-family: sans-serif;
   text-shadow: -1px -1px 0 black,   1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; }
-
-.on {
+#content .on {
   font-size: 10px;
   fill: FireBrick;
   font-family: sans-serif;
   font-weight: 600;
   text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
-
-.kun {
+#content .kun {
   font-size: 10px;
   fill: ForestGreen;
   font-family: sans-serif;
   font-weight: 600;
   text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
-
-.meaning {
+#content .meaning {
   font-size: 14px;
   fill: black;
   font-family: sans-serif;

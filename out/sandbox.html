@@ -13,31 +13,31 @@
 			
 <div id="wrapper">
 	<div id="kanjiGradeSelect">
-		<div class="gradeButton blue" id="grade1">
-			Grade 1
-		</div>
-		<div class="gradeButton green" id="grade2">
-			Grade 2
-		</div>
-		<div class="gradeButton yellow" id="grade3">
-			Grade 3
-		</div>
-		<div class="gradeButton orange" id="grade4">
-			Grade 4
-		</div>
-		<div class="gradeButton red" id="grade5">
-			Grade 5
-		</div>
-		<div class="gradeButton pink" id="grade6">
-			Grade 6
-		</div>
-		<div class="gradeButton purple" id="grade7">
-			Grade 7
-		</div>
-		<div class="gradeButton green" id="tree">
-			Tree
-		</div>
+	<div class="gradeButton blue" id="grade1">
+		Grade 1
 	</div>
+	<div class="gradeButton green" id="grade2">
+		Grade 2
+	</div>
+	<div class="gradeButton yellow" id="grade3">
+		Grade 3
+	</div>
+	<div class="gradeButton orange" id="grade4">
+		Grade 4
+	</div>
+	<div class="gradeButton red" id="grade5">
+		Grade 5
+	</div>
+	<div class="gradeButton pink" id="grade6">
+		Grade 6
+	</div>
+	<div class="gradeButton purple" id="grade7">
+		Grade 7
+	</div>
+	<div class="gradeButton green" id="tree">
+		木 radical
+	</div>
+</div>
 	<div id="kanjiInputContainer">
 		<input type="text" id="kanjiInput"></input>
 	</div>
@@ -86,6 +86,10 @@
 <script src="static/js/utilities.js"></script>
 <script src="static/js/kanjikai.js"></script>
 <script src="static/js/toggles.js"></script>
+<script>
+	kanjiInput.value = grade1;
+	kanjiInput.oninput();
+</script>
 
 		</div>
 		<div id="footer"></div>

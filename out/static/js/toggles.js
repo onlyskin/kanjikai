@@ -1,29 +1,5 @@
 function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters, kanjiFilter) {
 
-	kanjiInput.oninput = function() {
-		kanjiInputHistory.push(this.value);
-		filters.kanji = this.value;
-		unfilter();
-		reapplyFilters();
-	};
-
-	function inputButton(buttonId, kanjiString) {
-		var button = document.getElementById(buttonId);
-		button.onclick = function() {
-			kanjiInput.value = kanjiString;
-			kanjiInput.oninput();
-		};
-	}
-
-	inputButton('grade1', grade1);
-	inputButton('grade2', grade2);
-	inputButton('grade3', grade3);
-	inputButton('grade4', grade4);
-	inputButton('grade5', grade5);
-	inputButton('grade6', grade6);
-	inputButton('grade7', grade7);
-	inputButton('tree', tree);
-
 	romajiToggle.onchange = function() {
 		d3.selectAll('.node text.on, text.kun')
 		  .text(function(d) {
@@ -66,6 +42,30 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		}
 		update();
 	};
+
+	kanjiInput.oninput = function() {
+		kanjiInputHistory.push(this.value);
+		filters.kanji = this.value;
+		unfilter();
+		reapplyFilters();
+	};
+
+	function inputButton(buttonId, kanjiString) {
+		var button = document.getElementById(buttonId);
+		button.onclick = function() {
+			kanjiInput.value = kanjiString;
+			kanjiInput.oninput();
+		};
+	}
+
+	inputButton('grade1', grade1);
+	inputButton('grade2', grade2);
+	inputButton('grade3', grade3);
+	inputButton('grade4', grade4);
+	inputButton('grade5', grade5);
+	inputButton('grade6', grade6);
+	inputButton('grade7', grade7);
+	inputButton('tree', tree);
 
 	var manyBodyStrenghtInput = document.getElementById('manyBodyStrenghtInput');
 	manyBodyStrenghtInput.onchange = function() {

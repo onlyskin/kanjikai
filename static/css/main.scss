@@ -1,4 +1,5 @@
 @import "reset";
+@import "rangeslider";
 
 @font-face {
 	font-family: 'Vollkorn';
@@ -121,7 +122,12 @@ h1 {
 }
 
 #kanjiInputContainer {
-	height: 20px;
+
+	#kanjiInput {
+		font-size: 1em;
+		width: 100%;
+		margin: 2px;
+	}
 }
 
 #kanjiGradeSelect {
@@ -143,74 +149,76 @@ h1 {
 	float: left;
 }
 
-.links line.linkInner {
-  stroke: #FCEABD;
-  stroke-width: 2;
-}
+#content {
+	.links line.linkInner {
+	  stroke: #FCEABD;
+	  stroke-width: 2;
+	}
 
-.links line.linkOuter {
-  stroke: Indigo;
-  stroke-width: 4;
-}
+	.links line.linkOuter {
+	  stroke: Indigo;
+	  stroke-width: 4;
+	}
 
-.nodes circle {
-  stroke: none;
-  stroke-width: 40px;
-  fill: DarkSlateblue;
-}
+	.nodes circle {
+	  stroke: none;
+	  stroke-width: 40px;
+	  fill: DarkSlateblue;
+	}
 
-.nodes text {
-	text-anchor: middle;
-	alignment-baseline: middle;
-}
+	.nodes text {
+		text-anchor: middle;
+		alignment-baseline: middle;
+	}
 
-node:focus {
-	outline: none;
-}
+	node:focus {
+		outline: none;
+	}
 
-.kanji {
-	font-size: 30px;
-	fill: Ivory;
-	font-family: sans-serif;	
-	text-shadow:
-   -1px -1px 0 black,  
-    1px -1px 0 black,
-    -1px 1px 0 black,
-     1px 1px 0 black;
-}
+	.kanji {
+		font-size: 30px;
+		fill: Ivory;
+		font-family: sans-serif;	
+		text-shadow:
+	   -1px -1px 0 black,  
+	    1px -1px 0 black,
+	    -1px 1px 0 black,
+	     1px 1px 0 black;
+	}
 
-.on {
-	font-size: 10px;
-	fill: FireBrick;
-	font-family: sans-serif;
-	font-weight: 600;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
-}
+	.on {
+		font-size: 10px;
+		fill: FireBrick;
+		font-family: sans-serif;
+		font-weight: 600;
+		text-shadow:
+	   -1px -1px 1px white,  
+	    1px -1px 1px white,
+	    -1px 1px 1px white,
+	     1px 1px 1px white;
+	}
 
-.kun {
-	font-size: 10px;
-	fill: ForestGreen;	
-	font-family: sans-serif;	
-	font-weight: 600;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
-}
+	.kun {
+		font-size: 10px;
+		fill: ForestGreen;	
+		font-family: sans-serif;	
+		font-weight: 600;
+		text-shadow:
+	   -1px -1px 1px white,  
+	    1px -1px 1px white,
+	    -1px 1px 1px white,
+	     1px 1px 1px white;
+	}
 
-.meaning {
-	font-size: 14px;
-	fill: black;	
-	font-family: sans-serif;
-	font-weight: 1200;
-	text-shadow:
-   -1px -1px 1px white,  
-    1px -1px 1px white,
-    -1px 1px 1px white,
-     1px 1px 1px white;
+	.meaning {
+		font-size: 14px;
+		fill: black;	
+		font-family: sans-serif;
+		font-weight: 1200;
+		text-shadow:
+	   -1px -1px 1px white,  
+	    1px -1px 1px white,
+	    -1px 1px 1px white,
+	     1px 1px 1px white;
+	}
 }
