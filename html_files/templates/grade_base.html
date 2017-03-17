@@ -1,23 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="wrapper">
-	<div id="kanjiInputContainer">
-		<input type="text" id="kanjiInput"></input>
-	</div>
-	<div id="controls">
-		<div class="control-float">
-  			<input id="romajiToggle" type="checkbox" checked="checked"> <label for="romajiToggle">Romaji</label>
-	  	</div>
-  		<div>
-  			<input id="meaningsToggle" type="checkbox" checked="checked"> <label for="meaningsToggle">Meanings</label>
-  		</div>
-		<div class="control-float">
-  			<input id="Kun" type="checkbox" checked="checked"> <label for="Kun">Kun-yomi</label>
-  		</div>
-		<div>
-  			<input id="On" type="checkbox" checked="checked"> <label for="On">On-yomi</label>
-  		</div>
-  	</div>
+	{% include 'standard_controls.html' %}
 	<div id="content"></div>
 </div>
 <script src="static/js/d3.min.js"></script>

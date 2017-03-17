@@ -123,7 +123,6 @@ d3.json('static/data/large.json', function(response) {
 	var kanjiFilter = new charFilter();
 
 	filters.kanji = grade1;
-	kanjiInputHistory.push(filters.kanji);
 	kanjiInput.value = filters.kanji;
 	data = kanjiFilter.process(data, filters.kanji);
 

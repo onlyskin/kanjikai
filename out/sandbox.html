@@ -38,46 +38,43 @@
 		木 radical
 	</div>
 </div>
-	<div id="kanjiInputContainer">
-		<input type="text" id="kanjiInput"></input>
+  <div id="controls">
+	<div class="control-float">
+	<div>
+		<input id="romajiToggle" type="checkbox" checked="checked"> <label for="romajiToggle">Romaji</label>
 	</div>
-	<div id="controls">
-		<div class="control-float">
-			<div>
-  			<input id="romajiToggle" type="checkbox" checked="checked"> <label for="romajiToggle">Romaji</label>
-  		</div>
-  		<div>
-  			<input id="meaningsToggle" type="checkbox" checked="checked"> <label for="meaningsToggle">Meanings</label>
-  		</div>
-  	</div>
-		<div class="control-float">
-			<div>
-  			<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
-  		</div>
-			<div>
-  			<input type="range" id="collideRadius" min="0" max="100" step="5" value="50"><label for="collideRadius">Collide Radius</label>
-  		</div>
-			<div>
-  			<input type="range" id="linkDistance" min="0" max="200" step="5" value="160"><label for="linkDistance">Link Distance</label>
-  		</div>
-  	</div>
-		<div class="control-float">
-  		<div>
-  			<input id="alphaDecayOff" type="checkbox"><label for="alphaDecayOff">No Alpha Decay</label>
-  		</div>
-  		<div>
-  			<input id="velocityDecayOff" type="checkbox"><label for="velocityDecayOff">No Velocity Decay</label>
-  		</div>
-		</div>
-		<div class="control-float">
-			<div>
-  			<input id="Kun" type="checkbox" checked="checked"> <label for="Kun">Kun-yomi</label>
-  		</div>
-			<div>
-  			<input id="On" type="checkbox" checked="checked"> <label for="On">On-yomi</label>
-  		</div>
-  	</div>
+	<div>
+		<input id="meaningsToggle" type="checkbox" checked="checked"> <label for="meaningsToggle">Meanings</label>
 	</div>
+</div>
+<div class="control-float">
+	<div>
+		<input id="Kun" type="checkbox" checked="checked"> <label for="Kun">Kun-yomi</label>
+	</div>
+	<div>
+		<input id="On" type="checkbox" checked="checked"> <label for="On">On-yomi</label>
+	</div>
+</div>
+	<div class="control-float">
+	<div>
+		<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
+	</div>
+	<div>
+		<input type="range" id="collideRadius" min="0" max="100" step="5" value="50"><label for="collideRadius">Collide Radius</label>
+	</div>
+	<div>
+		<input type="range" id="linkDistance" min="0" max="200" step="5" value="160"><label for="linkDistance">Link Distance</label>
+	</div>
+</div>
+<div class="control-float">
+	<div>
+		<input id="alphaDecayOff" type="checkbox"><label for="alphaDecayOff">No Alpha Decay</label>
+	</div>
+	<div>
+		<input id="velocityDecayOff" type="checkbox"><label for="velocityDecayOff">No Velocity Decay</label>
+	</div>
+</div>
+</div>
 	<div id="content">
 	</div>
 </div>
@@ -86,10 +83,6 @@
 <script src="static/js/utilities.js"></script>
 <script src="static/js/kanjikai.js"></script>
 <script src="static/js/toggles.js"></script>
-<script>
-	kanjiInput.value = grade1;
-	kanjiInput.oninput();
-</script>
 
 		</div>
 		<div id="footer"></div>
