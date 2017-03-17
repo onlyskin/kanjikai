@@ -6,7 +6,6 @@ filters = {
 	kanji: ''
 };
 
-var kanjiInputHistory = [];
 var kanjiInput = document.getElementById('kanjiInput');
 
 var romajiToggle = document.getElementById('romajiToggle');
