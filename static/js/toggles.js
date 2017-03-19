@@ -44,7 +44,6 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 	};
 
 	kanjiInput.oninput = function() {
-		kanjiInputHistory.push(this.value);
 		filters.kanji = this.value;
 		unfilter();
 		reapplyFilters();
@@ -65,6 +64,7 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 	inputButton('grade5', grade5);
 	inputButton('grade6', grade6);
 	inputButton('grade7', grade7);
+	inputButton('all_kanji', all_kanji);
 	inputButton('tree', tree);
 
 	var manyBodyStrenghtInput = document.getElementById('manyBodyStrenghtInput');

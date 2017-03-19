@@ -12,8 +12,8 @@
 		<div id="pagecontent">
 			
 <div id="wrapper">
-  <div id="controls">
-	<div class="control-float">
+	<div id="controls">
+  <div class="control-float">
 	<div>
 		<input id="romajiToggle" type="checkbox" checked="checked"> <label for="romajiToggle">Romaji</label>
 	</div>
@@ -29,7 +29,8 @@
 		<input id="On" type="checkbox" checked="checked"> <label for="On">On-yomi</label>
 	</div>
 </div>
-	<div id="kanjiGradeSelect">
+  <div style="display: none;">
+    <div id="kanjiGradeSelect">
 	<div class="gradeButton blue" id="grade1">
 		Grade 1
 	</div>
@@ -80,16 +81,18 @@
 		<input id="velocityDecayOff" type="checkbox"><label for="velocityDecayOff">No Velocity Decay</label>
 	</div>
 </div>
+  </div>
 </div>
-	<div id="content">
-	</div>
+	<div id="content"></div>
 </div>
 <script src="static/js/d3.min.js"></script>
 <script src="static/js/main.js"></script>
 <script src="static/js/utilities.js"></script>
-<script src="static/js/toggles.js"></script>
 <script src="static/js/kanjikai.js"></script>
-<script>make_force_layout(grade1)</script>
+<script src="static/js/toggles.js"></script>
+
+<script>make_force_layout(grade5)</script>
+
 
 		</div>
 		<div id="footer"></div>
