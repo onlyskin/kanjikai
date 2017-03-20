@@ -1,5 +1,6 @@
 @import "reset";
 @import "rangeslider";
+@import "switch";
 
 @font-face {
 	font-family: 'Vollkorn';
@@ -131,12 +132,31 @@ body {
 	flex-direction: column;
 	align-items: stretch;
 	justify-content: center;
+
+	//to make the controls able to be positioned absolutely
+	position: relative;
 }
 
-#content {
-	text-align: center;
-	border: 1px solid black;
+#controls {
+	position: absolute;
+	top: 0px;
+	background: white;
 	border-radius: 10px;
+	box-shadow: 0px 0px 10px 5px white;
+	margin: 8px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.checkboxWrapper {
+	display: flex;
+	align-items: center;
+	margin: 5px;
+
+	.switchText {
+		margin-left: 5px;
+	}
 }
 
 #kanjiInputContainer {

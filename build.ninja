@@ -20,7 +20,7 @@ build $build_dir/static/js/toggles.js: cp static/js/toggles.js
 build $build_dir/static/data/large.json: cp static/data/large.json
 
 build $build_dir/static/css/type/Vollkorn-Regular.ttf: cp static/css/type/Vollkorn-Regular.ttf
-build $build_dir/static/css/main.css: sass static/css/main.scss | static/css/_reset.scss static/css/_rangeslider.scss
+build $build_dir/static/css/main.css: sass static/css/main.scss | static/css/_reset.scss static/css/_rangeslider.scss static/css/_switch.scss
 
 build $build_dir/index.html: jinja html_files/templates/index.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html
 
@@ -40,4 +40,12 @@ build $build_dir/grade_6.html: jinja html_files/templates/grade_6.html | html_fi
 
 build $build_dir/grade_7.html: jinja html_files/templates/grade_7.html | html_files/templates/base.html html_files/templates/grade_base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/standard_controls.html html_files/templates/grade_select.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
 
-build $build_dir/kihen.html: jinja html_files/templates/kihen.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
+build $build_dir/tree.html: jinja html_files/templates/tree.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
+
+build $build_dir/thing.html: jinja html_files/templates/thing.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
+
+build $build_dir/person.html: jinja html_files/templates/person.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
+
+build $build_dir/eat.html: jinja html_files/templates/eat.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
+
+build $build_dir/sword.html: jinja html_files/templates/sword.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js
