@@ -317,7 +317,9 @@ body {
   align-items: center;
   margin: 5px; }
   .checkboxWrapper .switchText {
-    margin-left: 5px; }
+    margin-left: 5px;
+    font-variant: small-caps;
+    font-size: 20px; }
 
 #kanjiInputContainer #kanjiInput {
   font-size: 1em;
@@ -339,36 +341,30 @@ body {
 .control-float {
   float: left; }
 
-#content .links line.linkInner {
-  stroke: #FCEABD;
-  stroke-width: 2; }
-#content .links line.linkOuter {
-  stroke: Indigo;
-  stroke-width: 4; }
+#content .links .linkInner {
+  stroke: Black;
+  stroke-width: 2;
+  stroke-dasharray: 10 2; }
 #content .nodes circle {
-  stroke: none;
-  stroke-width: 40px;
-  fill: DarkSlateblue; }
+  fill: rgba(0, 129, 255, 0.5); }
 #content .nodes text {
   text-anchor: middle;
   alignment-baseline: middle; }
-#content node:focus {
-  outline: none; }
 #content .kanji {
-  font-size: 30px;
-  fill: Ivory;
+  font-size: 32px;
+  fill: #00079c;
   font-family: sans-serif;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; }
+  text-shadow: -1px -1px 0 Ivory, 1px -1px 0 Ivory, -1px 1px 0 Ivory, 1px 1px 0 Ivory; }
 #content .on {
-  font-size: 10px;
+  font-size: 14px;
   fill: FireBrick;
   font-family: sans-serif;
   font-weight: 600;
   text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 #content .kun {
-  font-size: 10px;
+  font-size: 14px;
   fill: ForestGreen;
-  font-family: sans-serif;
+  font-family: serif;
   font-weight: 600;
   text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 #content .meaning {

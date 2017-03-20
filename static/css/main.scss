@@ -156,6 +156,8 @@ body {
 
 	.switchText {
 		margin-left: 5px;
+		font-variant: small-caps;
+		font-size: 20px;
 	}
 }
 
@@ -188,44 +190,42 @@ body {
 }
 
 #content {
-	.links line.linkInner {
-	  stroke: #FCEABD;
-	  stroke-width: 2;
+	.links {
+		.linkInner {
+			stroke: Black;
+			stroke-width: 2;
+			stroke-dasharray: 10 2;
+		}
+		// .linkOuter {
+		// 	stroke: Indigo;
+		// 	stroke-width: 4;
+		// }
+		// }
 	}
 
-	.links line.linkOuter {
-	  stroke: Indigo;
-	  stroke-width: 4;
-	}
-
-	.nodes circle {
-	  stroke: none;
-	  stroke-width: 40px;
-	  fill: DarkSlateblue;
-	}
-
-	.nodes text {
-		text-anchor: middle;
-		alignment-baseline: middle;
-	}
-
-	node:focus {
-		outline: none;
+	.nodes {
+		circle {
+			fill: rgba(0, 129, 255, 0.5);
+		}
+		text {
+			text-anchor: middle;
+			alignment-baseline: middle;
+		}
 	}
 
 	.kanji {
-		font-size: 30px;
-		fill: Ivory;
+		font-size: 32px;
+		fill: #00079c;
 		font-family: sans-serif;
 		text-shadow:
-	   -1px -1px 0 black,
-	    1px -1px 0 black,
-	    -1px 1px 0 black,
-	     1px 1px 0 black;
+	   -1px -1px 0 Ivory,
+	    1px -1px 0 Ivory,
+	    -1px 1px 0 Ivory,
+	     1px 1px 0 Ivory;
 	}
 
 	.on {
-		font-size: 10px;
+		font-size: 14px;
 		fill: FireBrick;
 		font-family: sans-serif;
 		font-weight: 600;
@@ -237,9 +237,9 @@ body {
 	}
 
 	.kun {
-		font-size: 10px;
+		font-size: 14px;
 		fill: ForestGreen;
-		font-family: sans-serif;
+		font-family: serif;
 		font-weight: 600;
 		text-shadow:
 	   -1px -1px 1px white,

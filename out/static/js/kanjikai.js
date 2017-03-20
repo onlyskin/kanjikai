@@ -245,9 +245,7 @@ function make_force_layout(layout_initial_kanji_list) {
 			newCircleElements = nodesEnterSelection.append('g')
 				  .attr('transform', 'translate(0,-3)')
 				  	.append('circle')
-				  .attr('r', function(d) { return circleRadius[d.type] })
-				  .style('stroke', 'PowderBlue')
-				  .style('stroke-width', 3);
+				  .attr('r', function(d) { return circleRadius[d.type] });
 
 			newTextElements = nodesEnterSelection.append('text')
 				  .text(function(d) {
@@ -321,8 +319,8 @@ function make_force_layout(layout_initial_kanji_list) {
 				  .append('g')
 			  	.attr('class', 'link');
 
-			linksEnterSelection.append('line')
-				.attr('class', 'linkOuter');
+			// linksEnterSelection.append('line')
+			// 	.attr('class', 'linkOuter');
 
 			linksEnterSelection.append('line')
 				.attr('class', 'linkInner');
