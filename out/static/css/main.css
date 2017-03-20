@@ -165,7 +165,7 @@ body {
   height: 2em;
   background: linear-gradient(to bottom, #ab47c1 0%, #b25fcb 100%); }
 
-h1 {
+#title {
   font-size: 80px;
   margin: 30px; }
 
@@ -198,21 +198,34 @@ h1 {
 
 #linkContainerWrapper {
   display: flex;
-  justify-content: space-around; }
+  justify-content: space-between;
+  margin: 20px; }
 
 .linkContainer {
   display: flex;
   flex-direction: column;
-  width: 20%;
-  margin: 20px; }
-  .linkContainer .indexLink {
-    margin: 5px;
-    border: 2px solid black;
-    padding: 20px;
-    border-radius: 50px;
-    font-size: 1.6em;
-    display: flex;
-    justify-content: center; }
+  width: 20%; }
+
+.radicalLinkContainer {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
+  width: 40%; }
+  .radicalLinkContainer .radical {
+    width: 1.6em; }
+
+.indexLink {
+  margin: 5px;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 1.6em;
+  box-shadow: 2px 2px 2px 0px #969696;
+  display: block;
+  text-align: center; }
+  .indexLink:hover {
+    box-shadow: 0px 0px 6px 4px white; }
 
 #wrapper {
   display: flex;
@@ -264,24 +277,24 @@ h1 {
   font-size: 30px;
   fill: Ivory;
   font-family: sans-serif;
-  text-shadow: -1px -1px 0 black,   1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; }
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; }
 #content .on {
   font-size: 10px;
   fill: FireBrick;
   font-family: sans-serif;
   font-weight: 600;
-  text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
+  text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 #content .kun {
   font-size: 10px;
   fill: ForestGreen;
   font-family: sans-serif;
   font-weight: 600;
-  text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
+  text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 #content .meaning {
   font-size: 14px;
   fill: black;
   font-family: sans-serif;
   font-weight: 1200;
-  text-shadow: -1px -1px 1px white,   1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
+  text-shadow: -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white; }
 
 /*# sourceMappingURL=main.css.map */

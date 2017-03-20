@@ -44,7 +44,7 @@ body {
 	background: linear-gradient(to bottom, #ab47c1 0%,#b25fcb 100%);
 }
 
-h1 {
+#title {
 	font-size: 80px;
 	margin: 30px;
 }
@@ -87,24 +87,42 @@ h1 {
 
 #linkContainerWrapper {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	margin: 20px;
 }
 
 .linkContainer {
 	display: flex;
 	flex-direction: column;
 	width: 20%;
-	margin: 20px;
+}
 
-	.indexLink {
-		margin: 5px;
-		border: 2px solid black;
-		padding: 20px;
-		border-radius: 50px;
-		font-size: 1.6em;
+.radicalLinkContainer {
+	display: flex;
+	flex-flow: row wrap;
+	align-content: flex-start;
+	align-items: flex-start;
+	justify-content: center;
+	width: 40%;
 
-		display: flex;
-		justify-content: center;
+	.radical {
+		width: 1.6em;
+	}
+
+}
+
+.indexLink {
+	margin: 5px;
+	padding: 20px;
+	border-radius: 50px;
+	font-size: 1.6em;
+	box-shadow: 2px 2px 2px 0px #969696;
+
+	display: block;
+	text-align: center;
+
+	&:hover {
+		box-shadow: 0px 0px 6px 4px white;
 	}
 }
 
@@ -178,9 +196,9 @@ h1 {
 	.kanji {
 		font-size: 30px;
 		fill: Ivory;
-		font-family: sans-serif;	
+		font-family: sans-serif;
 		text-shadow:
-	   -1px -1px 0 black,  
+	   -1px -1px 0 black,
 	    1px -1px 0 black,
 	    -1px 1px 0 black,
 	     1px 1px 0 black;
@@ -192,7 +210,7 @@ h1 {
 		font-family: sans-serif;
 		font-weight: 600;
 		text-shadow:
-	   -1px -1px 1px white,  
+	   -1px -1px 1px white,
 	    1px -1px 1px white,
 	    -1px 1px 1px white,
 	     1px 1px 1px white;
@@ -200,11 +218,11 @@ h1 {
 
 	.kun {
 		font-size: 10px;
-		fill: ForestGreen;	
-		font-family: sans-serif;	
+		fill: ForestGreen;
+		font-family: sans-serif;
 		font-weight: 600;
 		text-shadow:
-	   -1px -1px 1px white,  
+	   -1px -1px 1px white,
 	    1px -1px 1px white,
 	    -1px 1px 1px white,
 	     1px 1px 1px white;
@@ -212,11 +230,11 @@ h1 {
 
 	.meaning {
 		font-size: 14px;
-		fill: black;	
+		fill: black;
 		font-family: sans-serif;
 		font-weight: 1200;
 		text-shadow:
-	   -1px -1px 1px white,  
+	   -1px -1px 1px white,
 	    1px -1px 1px white,
 	    -1px 1px 1px white,
 	     1px 1px 1px white;
