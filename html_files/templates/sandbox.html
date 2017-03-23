@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
+{% include 'grade_select.html' %}
+<div id="kanjiInputContainer">
+    <input type="text" id="kanjiInput"></input>
+</div>
 <div id="wrapper">
-  {% include 'sandbox_controls.html' %}
+    {% include 'sandbox_controls.html' %}
 	<div id="content">
 	</div>
 </div>
 <script src="static/js/d3.min.js"></script>
+<script src="static/js/utilities.js"></script>
 <script src="static/js/main.js"></script>
 <script src="static/js/radicals.js"></script>
-<script src="static/js/utilities.js"></script>
 <script src="static/js/toggles.js"></script>
 <script src="static/js/kanjikai.js"></script>
 <script>make_force_layout(grade1)</script>

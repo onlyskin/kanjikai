@@ -124,7 +124,10 @@ function make_force_layout(layout_initial_kanji_list) {
 		var kanjiFilter = new charFilter();
 
 		filters.kanji = layout_initial_kanji_list;
-		kanjiInput.value = filters.kanji;
+		// check whether there is a kanjiInput element
+		if (kanjiInput) {
+			kanjiInput.value = filters.kanji;
+		}
 		data = kanjiFilter.process(data, filters.kanji);
 
 		var svg = d3.select('#content').append('svg');

@@ -48,6 +48,7 @@ body {
 #title {
 	font-size: 80px;
 	margin: 30px;
+	font-variant: small-caps;
 }
 
 .blue {
@@ -96,6 +97,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	width: 20%;
+
+	font-variant: small-caps;
 }
 
 .radicalLinkContainer {
@@ -137,7 +140,8 @@ body {
 	position: relative;
 }
 
-#controls {
+
+#controlWrapper {
 	position: absolute;
 	top: 0px;
 	background: white;
@@ -146,7 +150,11 @@ body {
 	margin: 8px;
 
 	display: flex;
-	flex-direction: column;
+
+	.controls {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .checkboxWrapper {

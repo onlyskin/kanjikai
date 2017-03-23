@@ -11,9 +11,39 @@
 </div>
 		<div id="pagecontent">
 			
+<div id="kanjiGradeSelect">
+	<div class="gradeButton blue" id="grade1">
+		Grade 1
+	</div>
+	<div class="gradeButton green" id="grade2">
+		Grade 2
+	</div>
+	<div class="gradeButton yellow" id="grade3">
+		Grade 3
+	</div>
+	<div class="gradeButton orange" id="grade4">
+		Grade 4
+	</div>
+	<div class="gradeButton red" id="grade5">
+		Grade 5
+	</div>
+	<div class="gradeButton pink" id="grade6">
+		Grade 6
+	</div>
+	<div class="gradeButton purple" id="grade7">
+		Grade 7
+	</div>
+	<div class="gradeButton gray" id="all_kanji">
+		All
+	</div>
+</div>
+<div id="kanjiInputContainer">
+    <input type="text" id="kanjiInput"></input>
+</div>
 <div id="wrapper">
-  <div id="controls">
-	<div class="checkboxWrapper">
+    <div id="controlWrapper">
+    <div class="controls">
+	   <div class="checkboxWrapper">
 	<div class="onoffswitch">
 		<input id="romajiToggle" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="romajiToggle">
 	        <span class="onoffswitch-inner"></span>
@@ -49,39 +79,9 @@
 	</div>
 	<div class="switchText">on-yomi</div>
 </div>
-	<div id="kanjiGradeSelect">
-	<div class="gradeButton blue" id="grade1">
-		Grade 1
-	</div>
-	<div class="gradeButton green" id="grade2">
-		Grade 2
-	</div>
-	<div class="gradeButton yellow" id="grade3">
-		Grade 3
-	</div>
-	<div class="gradeButton orange" id="grade4">
-		Grade 4
-	</div>
-	<div class="gradeButton red" id="grade5">
-		Grade 5
-	</div>
-	<div class="gradeButton pink" id="grade6">
-		Grade 6
-	</div>
-	<div class="gradeButton purple" id="grade7">
-		Grade 7
-	</div>
-	<div class="gradeButton gray" id="all_kanji">
-		All
-	</div>
-	<div class="gradeButton green" id="tree">
-		木 radical
-	</div>
-</div>
-<div id="kanjiInputContainer">
-	<input type="text" id="kanjiInput"></input>
-</div>
-<div class="control-float">
+    </div>
+    <div class="controls">
+        <div class="control-float">
 	<div>
 		<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
 	</div>
@@ -92,22 +92,34 @@
 		<input type="range" id="linkDistance" min="0" max="200" step="5" value="160"><label for="linkDistance">Link Distance</label>
 	</div>
 </div>
-<div class="control-float">
-	<div>
-		<input id="alphaDecayOff" type="checkbox"><label for="alphaDecayOff">No Alpha Decay</label>
+
+<div class="checkboxWrapper">
+	<div class="onoffswitch">
+		<input id="velocityDecayOff" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="velocityDecayOff">
+	        <span class="onoffswitch-inner"></span>
+	        <span class="onoffswitch-switch"></span>
+		</label>
 	</div>
-	<div>
-		<input id="velocityDecayOff" type="checkbox"><label for="velocityDecayOff">No Velocity Decay</label>
-	</div>
+	<div class="switchText">disable velocity decay</div>
 </div>
+<div class="checkboxWrapper">
+	<div class="onoffswitch">
+		<input id="alphaDecayOff" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="alphaDecayOff">
+	        <span class="onoffswitch-inner"></span>
+	        <span class="onoffswitch-switch"></span>
+		</label>
+	</div>
+	<div class="switchText">disable alpha decay</div>
+</div>
+    </div>
 </div>
 	<div id="content">
 	</div>
 </div>
 <script src="static/js/d3.min.js"></script>
+<script src="static/js/utilities.js"></script>
 <script src="static/js/main.js"></script>
 <script src="static/js/radicals.js"></script>
-<script src="static/js/utilities.js"></script>
 <script src="static/js/toggles.js"></script>
 <script src="static/js/kanjikai.js"></script>
 <script>make_force_layout(grade1)</script>

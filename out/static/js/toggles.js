@@ -43,11 +43,14 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 		update();
 	};
 
-	kanjiInput.oninput = function() {
-		filters.kanji = this.value;
-		unfilter();
-		reapplyFilters();
-	};
+	//test if there is a kanjiInput element first
+	if (kanjiInput) {
+		kanjiInput.oninput = function() {
+			filters.kanji = this.value;
+			unfilter();
+			reapplyFilters();
+		};
+	}
 
 	function inputButton(buttonId, kanjiString) {
 		var button = document.getElementById(buttonId);
@@ -65,7 +68,6 @@ function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, un
 	inputButton('grade6', grade6);
 	inputButton('grade7', grade7);
 	inputButton('all_kanji', all_kanji);
-	inputButton('tree', tree);
 
 	var manyBodyStrenghtInput = document.getElementById('manyBodyStrenghtInput');
 	manyBodyStrenghtInput.onchange = function() {

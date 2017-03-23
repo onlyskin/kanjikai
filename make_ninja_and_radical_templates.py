@@ -80,9 +80,8 @@ radical_html_output = u'''{% extends 'grade_base.html' %}
 {% endblock %}'''
 
 def write_file(filename, contents):
-    f = codecs.open(filename, 'w', 'utf-8')
-    f.write(contents)
-    f.close()
+    with codecs.open(filename, 'w', 'utf-8') as f:
+        f.write(contents)
 
 if __name__ == '__main__':
     write_file('build.ninja', ninja_file_output)
