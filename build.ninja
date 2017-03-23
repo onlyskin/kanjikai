@@ -21,9 +21,12 @@ build $build_dir/static/js/toggles.js: cp static/js/toggles.js
 build $build_dir/static/data/large.json: cp static/data/large.json
 
 build $build_dir/static/css/type/Vollkorn-Regular.ttf: cp static/css/type/Vollkorn-Regular.ttf
+build $build_dir/static/css/type/Vollkorn-Bold.ttf: cp static/css/type/Vollkorn-Bold.ttf
 build $build_dir/static/css/main.css: sass static/css/main.scss | static/css/_reset.scss static/css/_rangeslider.scss static/css/_switch.scss
 
 build $build_dir/index.html: jinja html_files/templates/index.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/radical_links.html
+
+build $build_dir/about.html: jinja html_files/templates/about.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html
 
 build $build_dir/sandbox.html: jinja html_files/templates/sandbox.html | html_files/templates/base.html html_files/templates/header.html html_files/templates/footer.html html_files/templates/grade_select.html html_files/templates/optional_controls.html html_files/templates/non_optional_controls.html html_files/templates/sandbox_controls.html static/js/main.js static/js/utilities.js static/js/kanjikai.js static/js/toggles.js static/js/radicals.js
 

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="aboutContainer">
+	<div id="about">
+		<div class="section">
+			<h3>Kanjikai:</h3>
+			<p>Kanjikai presents <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">force directed graph</a> visualisations of kanji and their associated readings. Kanji have two types of associated readings: kun-yomi (‘Japanese readings’) and on-yomi (‘Chinese readings’). The same kanji may have zero, one, two, or more of either of these types of readings. In addition, a kanji will sometimes share one or more of its readings with one or more other kanji.</p>
+			<p>The force directed graph layout represents this visually, so that the viewer can see the patterns of shared readings across kanji.</p>
+			<p>Kanjikai is written in JavaScript using <a href="https://d3js.org/">D3.js</a></p>
+		</div>
+		<div class="section">
+			<h3>Controls:</h3>
+			<p>You can use the romaji toggle to change whether kun-yomi and on-yomi are written in kana or romaji.</p>
+			<p>You can use the meanings toggle to show and hide the meanings of kanji.</p>
+			<p>You can use the on and kun toggles to respectively remove all the on yomi nodes or all the kun yomi nodes from the visualisation.</p>
+		</div>
+		<div class="section">
+			<h3>Interactivity:</h3>
+			<p>You can click and drag any kanji or reading. You can also click on a kanji or reading to highlight all directly linked kanji or readings.</p>
+		</div>
+		<div class="section">
+			<h3>Meanings:</h3>
+			<p>I used the Heisig keywords to label the kanji in the visualisation because they provide unique, single meanings for each kanji.</p>
+		</div>
+		<div class="section">
+			<h3>Browse by grade:</h3>
+			<p>You can use the grade buttons to get to individual visualisations for each of the seven official kanji grades. The first six grades contain about 1,000 kanji spread between them all, while the final seventh grade contains another 1,000 kanji.</p>
+		</div>
+		<div class="section">
+			<h3>Browse by radical:</h3>
+			<p>You can use the buttons with ‘radical’ symbols on them to view individual visualisations with all the kanji that contain a given radical.</p>
+		</div>
+		<div class="section">
+			<h3><a href="http://www.kanjikai.com/sandbox.html">Sandbox</a>:</h3>
+			<p>If you want to play with the parameters of the visualisation itself or to input custom lists of kanji, this is for you.</p>
+			<p>Here you can alter the link distance, collide radius, and repulsive / attractive charge parameters of the visualisation.</p>
+			<p>You can also edit the list of kanji in the input box to change the kanji in the visualisation.</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
