@@ -1,116 +1,116 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="static/css/main.css">
-		<link rel='shortcut icon' type='image/ico' href='favicon.ico' />
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel='shortcut icon' type='image/ico' href='favicon.ico' />
+    <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-		  ga('create', 'UA-81660578-2', 'auto');
-		  ga('send', 'pageview');
+ga('create', 'UA-81660578-2', 'auto');
+ga('send', 'pageview');
 
-		</script>
-	</head>
-	<body>
-		<div id="header">
-	<div class="navLinkContainer">
-			<a href="http://www.kanjikai.com" class="link purple">Home</a>
-			<a href="http://www.kanjikai.com/about.html" class="link blue">About</a>
-	</div>
-	<h1 id="title"><a href="index.html">kanjikai</a></h1>
-</div>
-		<div id="pagecontent">
-			
-<div id="wrapper">
-	<div id="controlWrapper">
-    <div class="controls">
-		<div class="checkboxWrapper">
-	<div class="onoffswitch">
-		<input id="romajiToggle" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="romajiToggle">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-		</label>
-	</div>
-	<div class="switchText">romaji</div>
-</div>
-<div class="checkboxWrapper">
-	<div class="onoffswitch">
-		<input id="meaningsToggle" type="checkbox" checked="checked" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="meaningsToggle">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-		</label>
-	</div>
-	<div class="switchText">meanings</div>
-</div>
-<div class="checkboxWrapper">
-	<div class="onoffswitch">
-		<input id="Kun" type="checkbox" checked="checked" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="Kun">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-		</label>
-	</div>
-	<div class="switchText">kun-yomi</div>
-</div>
-<div class="checkboxWrapper">
-	<div class="onoffswitch">
-		<input id="On" type="checkbox" checked="checked" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="On">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-		</label>
-	</div>
-	<div class="switchText">on-yomi</div>
-</div>
+    </script>
+  </head>
+  <body>
+    <div id="header">
+      <div class="navLinkContainer">
+        <a href="http://www.kanjikai.com" class="link purple">Home</a>
+        <a href="http://www.kanjikai.com/about.html" class="link blue">About</a>
+      </div>
+      <h1 id="title"><a href="index.html">kanjikai</a></h1>
     </div>
-	<div style="display: none;">
-		<div class="control-float">
-	<div>
-		<input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
-	</div>
-	<div>
-		<input type="range" id="collideRadius" min="0" max="100" step="5" value="50"><label for="collideRadius">Collide Radius</label>
-	</div>
-	<div>
-		<input type="range" id="linkDistance" min="0" max="200" step="5" value="160"><label for="linkDistance">Link Distance</label>
-	</div>
-</div>
+    <div id="pagecontent">
 
-<div class="checkboxWrapper">
-	<div class="onoffswitch">
-		<input id="velocityDecayOff" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="velocityDecayOff">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-		</label>
-	</div>
-	<div class="switchText">disable velocity decay</div>
-</div>
-<div class="checkboxWrapper">
-	<div class="onoffswitch">
-		<input id="alphaDecayOff" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="alphaDecayOff">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-		</label>
-	</div>
-	<div class="switchText">disable alpha decay</div>
-</div>
-	</div>
-</div>
-	<div id="content"></div>
-</div>
-<script src="static/js/d3.min.js"></script>
-<script src="static/js/utilities.js"></script>
-<script src="static/js/main.js"></script>
-<script src="static/js/radicals.js"></script>
-<script src="static/js/kanjikai.js"></script>
-<script src="static/js/toggles.js"></script>
+      <div id="wrapper">
+        <div id="controlWrapper">
+          <div class="controls">
+            <div class="checkboxWrapper">
+              <div class="onoffswitch">
+                <input id="romajiToggle" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="romajiToggle">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+              <div class="switchText">romaji</div>
+            </div>
+            <div class="checkboxWrapper">
+              <div class="onoffswitch">
+                <input id="meaningsToggle" type="checkbox" checked="checked" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="meaningsToggle">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+              <div class="switchText">meanings</div>
+            </div>
+            <div class="checkboxWrapper">
+              <div class="onoffswitch">
+                <input id="Kun" type="checkbox" checked="checked" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="Kun">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+              <div class="switchText">kun-yomi</div>
+            </div>
+            <div class="checkboxWrapper">
+              <div class="onoffswitch">
+                <input id="On" type="checkbox" checked="checked" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="On">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+              <div class="switchText">on-yomi</div>
+            </div>
+          </div>
+          <div style="display: none;">
+            <div class="control-float">
+              <div>
+                <input type="range" id="manyBodyStrenghtInput" min="-100" max="100" step="1" value="-100"><label for="manyBodyStrenghtInput">Charge Strength</label>
+              </div>
+              <div>
+                <input type="range" id="collideRadius" min="0" max="100" step="5" value="50"><label for="collideRadius">Collide Radius</label>
+              </div>
+              <div>
+                <input type="range" id="linkDistance" min="0" max="200" step="5" value="160"><label for="linkDistance">Link Distance</label>
+              </div>
+            </div>
 
-<script>make_force_layout(grade1)</script>
+            <div class="checkboxWrapper">
+              <div class="onoffswitch">
+                <input id="velocityDecayOff" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="velocityDecayOff">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+              <div class="switchText">disable velocity decay</div>
+            </div>
+            <div class="checkboxWrapper">
+              <div class="onoffswitch">
+                <input id="alphaDecayOff" type="checkbox" class="onoffswitch-checkbox"> <label class="onoffswitch-label" for="alphaDecayOff">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+              <div class="switchText">disable alpha decay</div>
+            </div>
+          </div>
+        </div>
+        <div id="content"></div>
+      </div>
+      <script src="static/js/d3.min.js"></script>
+      <script src="static/js/utilities.js"></script>
+      <script src="static/js/main.js"></script>
+      <script src="static/js/radicals.js"></script>
+      <script src="static/js/kanjikai.js"></script>
+      <script src="static/js/toggles.js"></script>
+
+      <script>make_force_layout(grade1)</script>
 
 
-		</div>
-		<div id="footer"></div>
-	</body>
+    </div>
+    <div id="footer"></div>
+  </body>
 </html>
