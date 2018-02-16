@@ -1,39 +1,9 @@
-var aboutSections = [['Kanjikai',
-    ['Kanjikai presents <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">force directed graph</a> visualisations of kanji and their associated readings. Kanji have two types of associated readings: kun-yomi (‘Japanese readings’) and on-yomi (‘Chinese readings’). The same kanji may have zero, one, two, or more of either of these types of readings. In addition, a kanji will sometimes share one or more of its readings with one or more other kanji.',
-    'The force directed graph layout represents this visually, so that the viewer can see the patterns of shared readings across kanji.',
-    'Kanjikai is written in JavaScript using <a href="https://d3js.org/">D3.js</a>'
-    ]],
-]
-
-var AboutSection = {
-    view: function(vnode) {
-        return m('.section', [
-                m('h3', vnode.attrs.title),
-                m('p', vnode.attrs.text),
-        ]);
-    }
-}
-
-var AboutText = {
-    view: function() {
-        return m('#aboutContainer', m('#about', [
-                    m(AboutSection, {title: 'Kanjikai', text: m.trust('Kanjikai presents <a href="">force directed graph</a>')}),
-        ]));
-    }
-}
-
-var AboutPage = {
-    view: function() {
-        return [m(Header), m('#pagecontent', m(AboutText)), m(Footer)];
-    }
-}
-
 var Header = {
     view: function() {
         return m('#header', [
                 m('.navLinkContainer', [
-                    m('a.link.purple', {href: 'http://www.kanjikai.com'}, 'Home'),
-                    m('a.link.blue', {href: '#!/about'}, 'About'),
+                    m('a.link.purple[href=/]', {oncreate: m.route.link}, 'Home'),
+                    m('a.link.blue[href=/about]', {oncreate: m.route.link}, 'About'),
                 ]),
                 m('h1#title',
                     m('a', {href: 'index.html'}, 'kanjikai')),
