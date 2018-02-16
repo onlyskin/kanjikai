@@ -1,0 +1,6 @@
+import json, codecs
+
+input_data = json.loads(codecs.open('fullList.txt', 'r', 'utf-8'))
+output_data = [{'kun': filter(lambda x: set(x) <= hiragana, x['readings']), 'on': filter(lambda x: set(x) <= katakana, x['readings']), 'kanji': x['kanji'], 'meaning': x['meaning']} for x in input_data]
+
+//write out
