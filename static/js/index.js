@@ -81,13 +81,8 @@ var MainPage = {
     }
 }
 
-var About = {
-    view: function() {
-        return m('', 'about page');
-    }
-};
-
 m.route(document.body, "/", {
     "/": MainPage,
     "/about": AboutPage,
+    "/grade1": Grade1,
 });
