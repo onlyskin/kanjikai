@@ -252,7 +252,7 @@ function make_force_layout(layout_initial_kanji_list) {
 
 			newTextElements = nodesEnterSelection.append('text')
 				  .text(function(d) {
-				  	if (romajiToggle.checked) { return kanaToRomaji(d.id); }
+				  	if (getRomajiToggle().checked) { return kanaToRomaji(d.id); }
 				  	else { return d.id; }
 				  })
 				  .attr('class', function(d) { return d.type; })
@@ -264,7 +264,7 @@ function make_force_layout(layout_initial_kanji_list) {
 			newMeaningElements = nodesEnterSelection.append('g')
 				  .attr('transform', 'translate(0,22)')
 					.append('text')
-				  .text(function(d) { if (d.meaning && meaningsToggle.checked) { return d.meaning; } })
+				  .text(function(d) { if (d.meaning && getMeaningsToggle().checked) { return d.meaning; } })
 				  .attr('class', function(d) { return 'meaning'; });
 
 			nodesEnterSelection.on('click', function(d, i) {

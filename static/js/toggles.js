@@ -1,17 +1,17 @@
 function setUpToggles(simulation, data, filters, onFilter, kunFilter, update, unfilter, reapplyFilters, kanjiFilter) {
 
-	romajiToggle.onchange = function() {
+	getRomajiToggle().onchange = function() {
 		d3.selectAll('.node text.on, text.kun')
 		  .text(function(d) {
-		  	if (romajiToggle.checked) { return kanaToRomaji(d.id); }
+		  	if (getRomajiToggle().checked) { return kanaToRomaji(d.id); }
 		  	else { return d.id; }
 		  });
 	};
 
-	meaningsToggle.onchange = function() {
+	getMeaningsToggle().onchange = function() {
 		d3.selectAll('.node text.meaning')
 		  .text(function(d) {
-		  	if (meaningsToggle.checked) { return d.meaning; }
+		  	if (getMeaningsToggle().checked) { return d.meaning; }
 		  });
 	};
 

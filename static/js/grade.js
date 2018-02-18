@@ -100,11 +100,11 @@ var GradeContent = {
     }
 }
 
-var Grade1 = {
-    oncreate: function() {
+var Grade = {
+    oncreate: function(vnode) {
         make_force_layout(grade1);
     },
     view: function() {
-        return [m(Header), m('#pagecontent', GradeContent), m(Footer)];
+        return [m(Header), m('#pagecontent', m(GradeContent)), m(Footer)];
     }
 }

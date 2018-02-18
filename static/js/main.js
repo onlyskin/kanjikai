@@ -8,6 +8,13 @@ filters = {
 
 var kanjiInput = document.getElementById('kanjiInput');
 
+function getRomajiToggle () {
+    return document.getElementById('romajiToggle');
+};
+function getMeaningsToggle () {
+    return document.getElementById('meaningsToggle');
+};
+
 var romajiToggle = document.getElementById('romajiToggle');
 var meaningsToggle = document.getElementById('meaningsToggle');
 
